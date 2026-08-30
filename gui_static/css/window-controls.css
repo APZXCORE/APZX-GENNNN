@@ -1,0 +1,50 @@
+.window-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  /* background-color: var(--card-bg); */
+  /* border-bottom: 1px solid var(--border); */
+  -webkit-app-region: drag;
+  gap: 5px;
+}
+
+#drag-bar {
+  height: 10px;
+  flex-grow: 1;
+  cursor: move;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 5px;
+  -webkit-app-region: no-drag;
+}
+
+.window-btn {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  gap: 5px;
+}
+
+.minimize {
+  background-color: #ffdd00;
+  color: #000;
+}
+
+.close {
+  background-color: #ff1100;
+  color: #fff;
+}
+
+.window-btn:hover {
+  filter: brightness(1.1);
+}

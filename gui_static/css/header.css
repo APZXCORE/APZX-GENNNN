@@ -1,0 +1,60 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+  animation: fadeIn 0.5s ease-out;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-icon {
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: #d903ff;
+  font-weight: 700;
+  text-shadow: 0 0 15px rgba(217,3,255,0.5);
+  letter-spacing: 1px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px currentColor;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.offline {
+  background-color: var(--error);
+}
+
+.online {
+  background-color: var(--success);
+}
+
+.status-text {
+  font-size: 14px;
+  color: var(--text-light);
+}

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APZX G3NNNN</title>
+    <link rel="icon" href="{{ url_for('static', filename='9captcha-logo.webp') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loading-screen.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap">
+    <style>
+        :root {
+            --accent: #d903ff;
+            --accent-dim: rgba(217,3,255,0.12);
+            --accent-glow: rgba(217,3,255,0.4);
+            --bg: #06060b;
+            --surface: #0d0d14;
+            --surface2: #11111a;
+            --border: #1a1a28;
+            --border2: #222233;
+            --text: #e8e8f0;
+            --dim: #55556a;
+            --dim2: #333348;
+            --ok: #00ff88;
+            --err: #ff3260;
+            --warn: #ffaa00;
+            --secondary: #00f8dc;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); font-size:13px; overflow:hidden; }
+        ::-webkit-scrollbar { width:4px; }
+        ::-webkit-scrollbar-track { background:transparent; }
+        ::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+        .app { display:flex; height:100vh; }
+        .sidebar {
+            width:200px; min-width:200px; background:var(--surface);
+            border-right:1px solid var(--border); display:flex;
+            flex-direction:column; padding:16px 0;
+        }
+        .sidebar-brand { padding:0 16px 20px; border-bottom:1px solid var(--border); margin-bottom:12px; }
+        .sidebar-brand h1 {
+            font-size:18px; font-weight:800; letter-spacing:2px;
+            background:linear-gradient(135deg,var(--accent),var(--secondary));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+        }
+        .sidebar-brand span { font-size:10px; color:var(--dim); letter-spacing:1px; text-transform:uppercase; }
+        .nav-item {
+            display:flex; align-items:center; gap:10px; padding:10px 16px;
+            cursor:pointer; color:var(--dim); font-size:12px; font-weight:500;
+            letter-spacing:0.5px; transition:all .15s; border-left:2px solid transparent;
+        }
+        .nav-item:hover { color:var(--text); background:rgba(255,255,255,0.02); }
+        .nav-item.on { color:var(--accent); background:var(--accent-dim); border-left-color:var(--accent); }
+        .nav-icon { font-size:14px; width:18px; text-align:center; }
+        .sidebar-spacer { flex:1; }
+        .sidebar-footer {
+            padding:12px 16px; border-top:1px solid var(--border);
+            font-size:10px; color:var(--dim2); text-align:center; letter-spacing:1px;
+        }
+        .main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+        .topbar {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:12px 24px; border-bottom:1px solid var(--border);
+            background:var(--surface); min-height:48px;
+        }
+        .topbar-title { font-size:13px; font-weight:600; color:var(--dim); letter-spacing:0.5px; }
+        .topbar-title strong { color:var(--text); }
+        .topbar-actions { display:flex; gap:8px; align-items:center; }
+        .status-dot { width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:6px; background:var(--dim); }
+        .status-dot.running { background:var(--ok); box-shadow:0 0 8px var(--ok); }
+        .topbar-badge {
+            font-size:10px; padding:3px 8px; border-radius:4px;
+            background:var(--surface2); border:1px solid var(--border); color:var(--dim); letter-spacing:0.5px;
+        }
+        .views-wrap { flex:1; overflow-y:auto; padding:24px; }
+        .view { display:none; }
+        .view.on { display:block; }
+        .card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:10px; padding:20px; margin-bottom:14px; transition:border-color .15s;
+        }
+        .card:hover { border-color:var(--border2); }
+        .card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+        .card-title { font-size:13px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:var(--dim); }
+        .card-title span { color:var(--accent); }
+        .card-desc { font-size:11px; color:var(--dim); margin-top:2px; }
+        .stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px; }
+        .stat-box {
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:8px; padding:14px 16px;
+        }
+        .stat-box .k { font-size:9px; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+        .stat-box .v { font-size:22px; font-weight:700; }
+        .stat-box .v.ok { color:var(--ok); }
+        .stat-box .v.err { color:var(--err); }
+        .stat-box .v.warn { color:var(--warn); }
+        .stat-box .v.sec { color:var(--secondary); }
+        .stat-box .v.acc { color:var(--accent); }
+        .row {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:10px 14px; background:rgba(0,0,0,0.2); border:1px solid var(--border);
+            border-radius:7px; margin-bottom:6px; transition:border-color .15s;
+        }
+        .row:hover { border-color:var(--border2); }
+        .row .lbl { font-size:12px; font-weight:500; }
+        .row .desc { font-size:11px; color:var(--dim); margin-top:2px; }
+        input[type=text], input[type=number], input[type=password], input[type=url], input[type=color], select {
+            background:var(--bg); border:1px solid var(--border); color:var(--text);
+            padding:7px 11px; border-radius:6px; font:500 12px 'Inter',sans-serif; outline:none; transition:border .15s;
+        }
+        input:focus, select:focus { border-color:var(--accent); }
+        input[type=number] { width:70px; text-align:center; }
+        input[type=color] { width:32px; height:28px; padding:2px; cursor:pointer; border-radius:5px; }
+        .sw { position:relative; width:36px; height:18px; flex-shrink:0; }
+        .sw input { opacity:0; width:0; height:0; }
+        .sw span { position:absolute; inset:0; background:var(--border2); border-radius:9px; cursor:pointer; transition:.2s; }
+        .sw span::before { content:''; position:absolute; width:14px; height:14px; left:2px; top:2px; background:#666; border-radius:50%; transition:.2s; }
+        .sw input:checked + span { background:var(--accent); }
+        .sw input:checked + span::before { transform:translateX(18px); background:#fff; }
+        .btn {
+            font:600 12px 'Inter',sans-serif; padding:8px 18px; border-radius:6px; border:none;
+            cursor:pointer; transition:all .15s; letter-spacing:0.3px;
+        }
+        .btn-p { background:var(--accent); color:#fff; box-shadow:0 2px 12px var(--accent-glow); }
+        .btn-p:hover { filter:brightness(1.15); transform:translateY(-1px); }
+        .btn-p:active { transform:translateY(0); }
+        .btn-s { background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--text); }
+        .btn-s:hover { background:rgba(255,255,255,0.08); border-color:var(--border2); }
+        .btn-danger { background:rgba(255,50,96,0.1); border:1px solid rgba(255,50,96,0.3); color:var(--err); }
+        .btn-danger:hover { background:rgba(255,50,96,0.15); }
+        .actions { display:flex; gap:8px; margin-top:14px; }
+        .tools { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+        .tool {
+            background:var(--surface); border:1px solid var(--border); border-radius:10px;
+            padding:20px; transition:all .2s; cursor:pointer;
+        }
+        .tool:hover { border-color:rgba(217,3,255,0.3); transform:translateY(-2px); box-shadow:0 4px 20px rgba(217,3,255,0.08); }
+        .tool-icon { font-size:22px; margin-bottom:10px; display:block; }
+        .tool h4 { font-size:13px; font-weight:700; margin-bottom:4px; color:var(--text); }
+        .tool p { font-size:11px; color:var(--dim); margin-bottom:14px; line-height:1.5; }
+        .term {
+            background:rgba(0,0,0,0.35); backdrop-filter:blur(8px); color:var(--accent);
+            font:12px/1.6 'Fira Code',monospace; padding:14px; min-height:300px;
+            max-height:420px; overflow-y:auto; overflow-x:auto; white-space:pre;
+            border-radius:8px; border:1px solid var(--border); margin-bottom:16px;
+        }
+        .t-s { color:var(--secondary); font-weight:600; }
+        .hz { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:8px; }
+        .hz-c {
+            display:flex; justify-content:space-between; align-items:center;
+            background:rgba(0,0,0,.25); border:1px solid var(--border);
+            border-radius:5px; padding:7px 10px; font-size:11px;
+        }
+        .toasts { position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:6px; z-index:9999; }
+        .toast {
+            background:var(--surface2); border:1px solid var(--border); border-left:3px solid var(--accent);
+            padding:10px 16px; border-radius:6px; color:#fff; font-size:12px; font-weight:500;
+            opacity:0; transform:translateX(20px); transition:all .3s;
+        }
+        .toast.show { opacity:1; transform:translateX(0); }
+        .loader {
+            position:fixed; inset:0; background:var(--bg);
+            display:flex; align-items:center; justify-content:center; z-index:9999; transition:opacity .4s;
+        }
+        .loader-inner { text-align:center; }
+        .loader-inner img { width:80px; margin-bottom:20px; filter:drop-shadow(0 0 25px rgba(217,3,255,0.5)); animation:bob 2.5s ease-in-out infinite; }
+        .loader-inner h1 {
+            font-size:28px; font-weight:800; letter-spacing:4px;
+            background:linear-gradient(135deg,var(--accent),var(--secondary));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:6px;
+        }
+        .loader-inner p { font-size:11px; color:var(--dim); margin-bottom:24px; letter-spacing:2px; text-transform:uppercase; }
+        .loader-bar { width:200px; height:2px; background:var(--border); border-radius:2px; margin:0 auto 10px; overflow:hidden; }
+        .loader-fill { height:100%; width:0; background:linear-gradient(90deg,var(--accent),var(--secondary)); transition:width .5s; }
+        .loader-txt { font-size:10px; color:var(--dim2); letter-spacing:1px; }
+        @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+        .progress-wrap {
+            background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:14px;
+        }
+        .progress-wrap h3 { font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+        .pb-track { width:100%; height:4px; background:var(--border); border-radius:2px; overflow:hidden; margin-bottom:8px; }
+        .pb-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--secondary)); transition:width .3s ease-out; border-radius:2px; }
+        .pb-row { display:flex; justify-content:space-between; font-size:10px; color:var(--dim); font-family:'Fira Code',monospace; }
+        .pb-stats { display:flex; gap:20px; margin-top:14px; }
+        .pb-stat { text-align:center; flex:1; }
+        .pb-stat .num { font-size:20px; font-weight:700; }
+        .pb-stat .lbl { font-size:9px; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
+        .pb-stat.ok .num { color:var(--ok); }
+        .pb-stat.err .num { color:var(--err); }
+        .pb-stat.acc .num { color:var(--accent); }
+        .pb-details { font-size:10px; color:var(--dim2); text-align:center; margin-top:10px; font-family:'Fira Code',monospace; }
+        .mf { margin-top:10px; }
+        .mf > div { margin-bottom:8px; }
+        .mf label { display:block; font-size:10px; color:var(--dim); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
+        .mf input { width:100%; }
+        .link-box { margin-top:10px; }
+        .link-box label { display:block; font-size:10px; color:var(--dim); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
+        .link-box input { width:100%; }
+        .theme-row { display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+        .theme-swatch { width:26px; height:26px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:all .15s; }
+        .theme-swatch:hover, .theme-swatch.on { border-color:#fff; transform:scale(1.15); }
+        .credits-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; text-align:center; }
+        .credits-wrap img { width:70px; margin-bottom:20px; filter:drop-shadow(0 0 20px rgba(217,3,255,0.4)); }
+        .credits-wrap h2 {
+            font-size:24px; font-weight:800; letter-spacing:3px; margin-bottom:6px;
+            background:linear-gradient(135deg,var(--accent),var(--secondary));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+        }
+        .credits-wrap .by { color:var(--dim); font-size:12px; margin-bottom:20px; letter-spacing:1px; }
+        .credits-wrap a {
+            color:var(--accent); text-decoration:none; font-weight:600; font-size:12px;
+            padding:9px 22px; border:1px solid var(--accent); border-radius:6px; transition:all .2s;
+        }
+        .credits-wrap a:hover { background:var(--accent); color:#fff; }
+        .section-label {
+            font-size:10px; font-weight:700; color:var(--dim); text-transform:uppercase;
+            letter-spacing:1.5px; margin:20px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--border);
+        }
+        .section-label:first-child { margin-top:0; }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <img src="{{ url_for('static', filename='9captcha-logo.webp') }}" alt="APZX">
+            <h1>APZX</h1>
+            <p>Token Generation Engine</p>
+            <div class="loader-bar"><div class="loader-fill" id="lf"></div></div>
+            <div class="loader-txt" id="lt">Initializing...</div>
+        </div>
+    </div>
+
+    <div class="app" id="app" style="display:none;">
+        <div class="sidebar">
+            <div class="sidebar-brand"><h1>APZX</h1><span>G3NNNN v1.0</span></div>
+            <div class="nav-item on" data-v="gen"><span class="nav-icon">&#9889;</span> Generator</div>
+            <div class="nav-item" data-v="joiner"><span class="nav-icon">&#128279;</span> Joiner</div>
+            <div class="nav-item" data-v="tools"><span class="nav-icon">&#128736;</span> Tools</div>
+            <div class="nav-item" data-v="settings"><span class="nav-icon">&#9881;</span> Settings</div>
+            <div class="nav-item" data-v="theme"><span class="nav-icon">&#127912;</span> Theme</div>
+            <div class="nav-item" data-v="setup"><span class="nav-icon">&#128193;</span> Files</div>
+            <div class="nav-item" data-v="term"><span class="nav-icon">&#128187;</span> Console</div>
+            <div class="nav-item" data-v="credits"><span class="nav-icon">&#9733;</span> Credits</div>
+            <div class="sidebar-spacer"></div>
+            <div class="sidebar-footer">MAIL-ONLY ENGINE<br>NO NUMBER VERIFICATION</div>
+        </div>
+
+        <div class="main">
+            <div class="topbar">
+                <div class="topbar-title"><span class="status-dot" id="status-dot"></span><strong id="topbar-status">Idle</strong></div>
+                <div class="topbar-actions">
+                    <span class="topbar-badge" id="solver-bd">Extension</span>
+                    <span class="topbar-badge" id="mail-badge">CyberTemp</span>
+                </div>
+            </div>
+
+            <div class="views-wrap">
+                <!-- GENERATOR -->
+                <div class="view on" id="v-gen">
+                    <div class="stat-row">
+                        <div class="stat-box"><div class="k">Verified</div><div class="v ok" id="stat-gen">0</div></div>
+                        <div class="stat-box"><div class="k">Email Verified</div><div class="v sec" id="stat-ev">0</div></div>
+                        <div class="stat-box"><div class="k">Captcha Solved</div><div class="v acc" id="stat-cap">0</div></div>
+                        <div class="stat-box"><div class="k">Total</div><div class="v" id="stat-total">0</div></div>
+                    </div>
+                    <div class="progress-wrap" id="gen-progress-container" style="display:none;">
+                        <h3>Live Progress</h3>
+                        <div class="pb-track"><div class="pb-fill" id="pb-fill"></div></div>
+                        <div class="pb-row"><span id="pb-count">0 / 0</span><span id="pb-pct">0%</span></div>
+                        <div class="pb-stats">
+                            <div class="pb-stat ok"><div class="num" id="pb-ok">0</div><div class="lbl">Verified</div></div>
+                            <div class="pb-stat err"><div class="num" id="pb-fail">0</div><div class="lbl">Failed</div></div>
+                            <div class="pb-stat acc"><div class="num" id="pb-pend">0</div><div class="lbl">Pending</div></div>
+                        </div>
+                        <div class="pb-details" id="pb-details">Awaiting data stream...</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div><div class="card-title"><span>&#9889;</span> Token Generator</div><div class="card-desc">Generate Discord accounts with mail verification only</div></div>
+                        </div>
+                        <div class="actions">
+                            <button class="btn btn-p" onclick="run('generator')" id="btn-gen">Start Generation</button>
+                            <button class="btn btn-danger" onclick="stop()">Stop</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div><div class="card-title"><span>&#128640;</span> First-time Setup</div><div class="card-desc">Install all required pip and npm packages</div></div>
+                        </div>
+                        <div class="actions"><button class="btn btn-s" onclick="run('setup')">Run Setup</button></div>
+                    </div>
+                </div>
+
+                <!-- JOINER -->
+                <div class="view" id="v-joiner">
+                    <div class="card">
+                        <div class="card-header"><div><div class="card-title"><span>&#128279;</span> Token Joiner</div><div class="card-desc">Join tokens to a Discord server</div></div></div>
+                        <div class="row">
+                            <div><div class="lbl">Mode</div><div class="desc">Choose join method</div></div>
+                            <select id="j-mode" onchange="toggleLinkInput()" style="width:200px;">
+                                <option value="auth">Auth Joiner (OAuth2)</option>
+                                <option value="link">Link Joiner (Invite)</option>
+                            </select>
+                        </div>
+                        <div id="link-input" class="link-box" style="display:none;"><label>Invite Link</label><input type="text" id="j-link" placeholder="https://discord.gg/xxxxxxx"></div>
+                        <div class="actions"><button class="btn btn-p" onclick="startJoiner()">Start Joiner</button><button class="btn btn-danger" onclick="stop()">Stop</button></div>
+                    </div>
+                </div>
+
+                <!-- TOOLS -->
+                <div class="view" id="v-tools">
+                    <div class="section-label">Utilities</div>
+                    <div class="tools">
+                        <div class="tool" onclick="run('checker')"><span class="tool-icon">&#128269;</span><h4>Token Checker</h4><p>Check token validity, flags, nitro status, and account details.</p><button class="btn btn-s" style="width:100%">Start</button></div>
+                        <div class="tool" onclick="run('onliner')"><span class="tool-icon">&#128176;</span><h4>Token Onliner</h4><p>Keep generated tokens online via WebSocket gateway keepalive.</p><button class="btn btn-s" style="width:100%">Start</button></div>
+                        <div class="tool" onclick="run('proxy_checker')"><span class="tool-icon">&#127760;</span><h4>Proxy Checker</h4><p>Test your proxy list for speed, location, and availability.</p><button class="btn btn-s" style="width:100%">Start</button></div>
+                        <div class="tool" onclick="run('uninstall_setup')"><span class="tool-icon">&#128465;</span><h4>Uninstall Setup</h4><p>Remove all pip and npm dependencies completely.</p><button class="btn btn-s" style="width:100%">Run</button></div>
+                    </div>
+                </div>
+
+                <!-- SETTINGS -->
+                <div class="view" id="v-settings">
+                    <div class="section-label">Core</div>
+                    <div class="card">
+                        <div class="row"><div><div class="lbl">Email Verification</div><div class="desc">Verify generated accounts via email</div></div><label class="sw"><input type="checkbox" id="cfg-verify"><span></span></label></div>
+                        <div class="row"><div><div class="lbl">Cloudflare Warp Rotation</div><div class="desc">Rotate IP via Cloudflare WARP (Windows only)</div></div><label class="sw"><input type="checkbox" id="cfg-warp"><span></span></label></div>
+                        <div class="row"><div><div class="lbl">Use Local IP (No Proxy)</div><div class="desc">Use your own IP instead of proxies — 90s cooldown between each account</div></div><label class="sw"><input type="checkbox" id="cfg-localip"><span></span></label></div>
+                    </div>
+                    <div class="section-label">Threading</div>
+                    <div class="card">
+                        <div class="row"><div class="lbl">Generator Threads</div><input type="number" id="th-gen" value="1" min="1" style="width:70px;font-family:monospace;padding:4px;"></div>
+                        <div class="row"><div class="lbl">Joiner Threads</div><input type="number" id="th-joiner" value="100" min="1" style="width:70px;font-family:monospace;padding:4px;"></div>
+                        <div class="row"><div class="lbl">Proxy Checker Threads</div><input type="number" id="th-proxy" value="50" min="1" style="width:70px;font-family:monospace;padding:4px;"></div>
+                        <div class="row"><div class="lbl">Checker Threads</div><input type="number" id="th-checker" value="10" min="1" style="width:70px;font-family:monospace;padding:4px;"></div>
+                        <div class="row"><div class="lbl">Humanizer Threads</div><input type="number" id="th-hz" value="3" min="1" style="width:70px;font-family:monospace;padding:4px;"></div>
+                    </div>
+                    <div class="section-label">Captcha</div>
+                    <div class="card">
+                        <div class="row"><div><div class="lbl">Extension Solver</div><div class="desc">Use browser extension to solve captchas</div></div><label class="sw"><input type="checkbox" id="cfg-ext" onchange="solverToggle('ext')"><span></span></label></div>
+                        <div class="row"><div><div class="lbl">Request Solver</div><div class="desc">Use remote API to solve captchas (needs proxies)</div></div><label class="sw"><input type="checkbox" id="cfg-req" onchange="solverToggle('req')"><span></span></label></div>
+                        <div class="row" style="flex-direction:column;align-items:stretch;">
+                            <div style="margin-bottom:6px;"><div class="lbl">API Key</div></div>
+                            <input type="text" id="cfg-api" placeholder="9cap-xxxx" style="width:100%;font-family:monospace;">
+                        </div>
+                    </div>
+                    <div class="section-label">Humanizer</div>
+                    <div class="card">
+                        <div class="row"><div><div class="lbl">Enable Humanizer</div><div class="desc">Randomize avatar, bio, name, pronouns, hypesquad</div></div><label class="sw"><input type="checkbox" id="cfg-hz" onchange="toggleHz(this.checked)"><span></span></label></div>
+                        <div id="hz-opts" style="display:none;">
+                            <div class="hz">
+                                <div class="hz-c"><span>Avatar</span><label class="sw"><input type="checkbox" id="hz-avatar"><span></span></label></div>
+                                <div class="hz-c"><span>Bio</span><label class="sw"><input type="checkbox" id="hz-bio"><span></span></label></div>
+                                <div class="hz-c"><span>Name</span><label class="sw"><input type="checkbox" id="hz-dn"><span></span></label></div>
+                                <div class="hz-c"><span>Pronouns</span><label class="sw"><input type="checkbox" id="hz-pn"><span></span></label></div>
+                                <div class="hz-c"><span>Banner</span><label class="sw"><input type="checkbox" id="hz-bn"><span></span></label></div>
+                                <div class="hz-c"><span>HypeSquad</span><label class="sw"><input type="checkbox" id="hz-hs"><span></span></label></div>
+                            </div>
+                            <div class="row" style="margin-top:8px;"><div class="lbl">Retries</div><input type="number" id="hz-ret" value="3" min="1" style="width:60px;font-family:monospace;padding:4px;"></div>
+                        </div>
+                    </div>
+                    <div class="section-label">Mail Provider</div>
+                    <div class="card">
+                        <div class="row"><div><div class="lbl">Provider</div><div class="desc">Select your temp mail service</div></div><select id="cfg-mp" onchange="updateMail()" style="width:180px;">
+                            <option value="duckmail">DuckMail</option><option value="cybertemp">CyberTemp</option>
+                            <option value="tempmail_lol">TempMail.lol</option><option value="hotmail007">Hotmail007</option>
+                            <option value="lution">Lution</option><option value="zeus">Zeus</option>
+                            <option value="draxono">Draxono</option><option value="mailcow">Mailcow</option>
+                        </select></div>
+                        <div class="mf" id="mail-fields">
+                            <div id="mf-key" style="display:none"><label id="mf-key-lbl">API Key</label><input type="text" id="cfg-mapi"></div>
+                            <div id="mf-mc" style="display:none"><label>Mailcode</label><input type="text" id="cfg-mmc"></div>
+                            <div id="mf-host" style="display:none"><label>Host</label><input type="text" id="cfg-mhost" placeholder="mail.example.com"></div>
+                            <div id="mf-dom" style="display:none"><label>Domain</label><input type="text" id="cfg-mdom" placeholder="example.com"></div>
+                            <p id="mf-none" style="font-size:11px; color:var(--dim); margin-top:4px;">No config needed for this provider.</p>
+                        </div>
+                    </div>
+                    <div class="section-label">Auth Joiner</div>
+                    <div class="card">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div><label style="font-size:10px; color:var(--dim); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px;">Bot Client ID</label><input type="text" id="aj-id" style="width:100%"></div>
+                            <div><label style="font-size:10px; color:var(--dim); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px;">Bot Secret</label><input type="password" id="aj-sec" style="width:100%"></div>
+                            <div><label style="font-size:10px; color:var(--dim); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px;">Bot Token</label><input type="password" id="aj-tok" style="width:100%"></div>
+                            <div><label style="font-size:10px; color:var(--dim); display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px;">Guild ID</label><input type="text" id="aj-gid" style="width:100%"></div>
+                        </div>
+                    </div>
+                    <div class="actions" style="justify-content:flex-end; align-items:center; gap:16px; margin-top:8px;">
+                        <label style="display:flex; align-items:center; gap:8px; font-size:11px; color:var(--dim); cursor:pointer;">
+                            Auto Save <label class="sw"><input type="checkbox" id="cfg-autosave" onchange="toggleAutoSave('settings')"><span></span></label>
+                        </label>
+                        <button class="btn btn-s" onclick="loadCfg()">Reload</button>
+                        <button class="btn btn-p" onclick="saveCfg()">Save Config</button>
+                    </div>
+                </div>
+
+                <!-- THEME -->
+                <div class="view" id="v-theme">
+                    <div class="card">
+                        <div class="card-header"><div><div class="card-title"><span>&#127912;</span> Accent Color</div><div class="card-desc">Pick a preset or enter your own color</div></div></div>
+                        <div class="theme-row" id="presets"></div>
+                        <div class="row" style="margin-top:12px;"><div class="lbl">Custom Color</div><input type="color" id="color-pick" value="#d903ff" onchange="setAccent(this.value)"></div>
+                    </div>
+                </div>
+
+                <!-- FILES -->
+                <div class="view" id="v-setup">
+                    <div class="card" style="display:flex; flex-direction:column; height:calc(100vh - 120px);">
+                        <div class="card-header">
+                            <div><div class="card-title"><span>&#128193;</span> File Manager</div><div class="card-desc">Edit input/output files directly from the UI</div></div>
+                        </div>
+                        <div class="row" style="margin-bottom:12px;"><div class="lbl">Select File</div><select id="input-files-select" onchange="loadInputFile()" style="width:250px;"><option value="">-- Loading --</option></select></div>
+                        <textarea id="input-editor" style="flex:1; background:var(--bg); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:12px; font:12px/1.5 'Fira Code',monospace; resize:none; margin-bottom:12px;" placeholder="Select a file to edit..."></textarea>
+                        <div class="actions" style="justify-content:flex-end; align-items:center; gap:16px;">
+                            <label style="display:flex; align-items:center; gap:8px; font-size:11px; color:var(--dim); cursor:pointer;">
+                                Auto Save <label class="sw"><input type="checkbox" id="file-autosave" onchange="toggleAutoSave('file')"><span></span></label>
+                            </label>
+                            <button class="btn btn-s" onclick="loadInputFilesList()">Refresh</button>
+                            <button class="btn btn-p" onclick="saveInputFile()">Save File</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TERMINAL -->
+                <div class="view" id="v-term">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <div class="card-title" style="margin:0;"><span>&#128187;</span> Console Output</div>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn btn-s" style="padding:6px 12px; font-size:11px;" onclick="document.getElementById('tm').innerHTML=''">Clear</button>
+                            <button class="btn btn-danger" style="padding:6px 12px; font-size:11px;" onclick="stop()">Stop</button>
+                        </div>
+                    </div>
+                    <div class="term" id="tm" style="margin-bottom:14px; min-height:300px;"></div>
+                </div>
+
+                <!-- CREDITS -->
+                <div class="view" id="v-credits">
+                    <div class="credits-wrap">
+                        <img src="{{ url_for('static', filename='9captcha-logo.webp') }}" alt="APZX">
+                        <h2>APZX G3NNNN</h2>
+                        <div class="by">v1.0 &mdash; Made by 4iuc | APZXCORE</div>
+                        <p style="color:var(--dim); font-size:11px; margin-bottom:24px; max-width:320px; line-height:1.6;">
+                            High-performance Discord token generation engine.<br>
+                            Mail-only verification &mdash; no phone number required.<br>
+                            Cross-platform: Windows, Linux, macOS, Termux.
+                        </p>
+                        <a href="#" onclick="openDiscord(); return false;">Join Discord Server</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toasts" id="toasts"></div>
+    <script>
+    // Nav
+    document.querySelectorAll('.nav-item').forEach(t => {
+        t.addEventListener('click', () => {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('on'));
+            document.querySelectorAll('.view').forEach(v => { v.classList.remove('on'); v.style.display='none'; });
+            t.classList.add('on');
+            const el = document.getElementById('v-' + t.dataset.v);
+            el.style.display = 'block'; el.classList.add('on');
+        });
+    });
+
+    // Theme presets
+    const PRESETS = ['#d903ff','#6366f1','#00f8dc','#00ff88','#ffaa00','#ff3260','#ec4899','#8b5cf6','#14b8a6','#f97316'];
+    const box = document.getElementById('presets');
+    PRESETS.forEach(c => {
+        const s = document.createElement('div');
+        s.className = 'theme-swatch' + (c === '#d903ff' ? ' on' : '');
+        s.style.background = c;
+        s.onclick = () => setAccent(c);
+        box.appendChild(s);
+    });
+    function setAccent(hex) {
+        document.documentElement.style.setProperty('--accent', hex);
+        document.documentElement.style.setProperty('--accent-dim', hex + '1f');
+        document.documentElement.style.setProperty('--accent-glow', hex + '66');
+        document.getElementById('color-pick').value = hex;
+        document.querySelectorAll('.theme-swatch').forEach(s => s.classList.toggle('on', rgbToHex(s.style.background) === hex.toLowerCase()));
+        if (window.pywebview && window.pywebview.api) { _cfg.theme_accent = hex; window.pywebview.api.save_theme(hex); }
+    }
+    function rgbToHex(rgb) {
+        if (rgb.startsWith('#')) return rgb;
+        const m = rgb.match(/\d+/g);
+        if (!m) return '';
+        return '#' + m.slice(0,3).map(x => parseInt(x).toString(16).padStart(2,'0')).join('');
+    }
+
+    function toggleLinkInput() {
+        document.getElementById('link-input').style.display = document.getElementById('j-mode').value === 'link' ? 'block' : 'none';
+    }
+    function solverToggle(which) {
+        if (which === 'ext') {
+            document.getElementById('cfg-ext').checked = true; document.getElementById('cfg-req').checked = false;
+            document.getElementById('solver-bd').textContent = 'Extension';
+        } else {
+            document.getElementById('cfg-req').checked = true; document.getElementById('cfg-ext').checked = false;
+            document.getElementById('solver-bd').textContent = 'Request';
+        }
+    }
+    function toggleHz(on) { document.getElementById('hz-opts').style.display = on ? 'block' : 'none'; }
+    function openDiscord() { window.open('https://discord.gg/SRUg94jycv', '_blank'); }
+
+    let _lt = null, _logLineNode = null;
+    function parseProgress(lineText) {
+        if (!lineText) return;
+        let m = lineText.match(/\[([▓▒░=*-]+)[\s\.]*\]\s*(\d+)%\s*(.*)/);
+        if (m) {
+            document.getElementById('gen-progress-container').style.display = 'block';
+            let details = m[3].trim();
+            if (details.length > 70) details = details.substring(0, 67) + '...';
+            document.getElementById('pb-details').textContent = details;
+        }
+    }
+
+    async function updateDashboardMetrics() {
+        if (!window.pywebview?.api) return;
+        const st = await pywebview.api.get_status_updates();
+        if(st) {
+            document.getElementById('gen-progress-container').style.display = 'block';
+            document.getElementById('pb-fill').style.width = st.progress + '%';
+            document.getElementById('pb-pct').textContent = st.progress + '%';
+            document.getElementById('pb-count').textContent = (st.success||0) + ' / ' + (st.total||0);
+            let val1 = st.success || 0, val2 = st.failed || 0, val3 = st.pending || 0;
+            if (st.engine === 'generator') {
+                val1 = st.ver || st.success || 0; val2 = st.cap_solved || 0; val3 = st.total || 0;
+                document.getElementById('pb-details').textContent = `EV: ${st.ver||0} | Cap: ${st.cap_solved||0}/${st.cap_fail||0} | Locked: ${st.locked||0}`;
+                document.getElementById('pb-track').style.display = 'none';
+            } else { document.getElementById('pb-track').style.display = 'block'; }
+            document.getElementById('stat-gen').textContent = val1;
+            document.getElementById('stat-ev').textContent = st.ver || 0;
+            document.getElementById('stat-cap').textContent = st.cap_solved || 0;
+            document.getElementById('stat-total').textContent = st.total || 0;
+            document.getElementById('pb-ok').textContent = val1;
+            document.getElementById('pb-fail').textContent = val2;
+            document.getElementById('pb-pend').textContent = val3;
+            let dot = document.getElementById('status-dot');
+            let statusText = document.getElementById('topbar-status');
+            if (st.is_running) { dot.classList.add('running'); statusText.textContent = 'Running'; }
+            else { dot.classList.remove('running'); statusText.textContent = 'Idle'; }
+        }
+    }
+
+    const ansiRegex = /\x1b\[([0-9;]+)m/g;
+    const basicMap = { 30:"grey",31:"var(--err)",32:"var(--ok)",33:"yellow",34:"blue",35:"magenta",36:"cyan",37:"white",90:"grey" };
+    function ansiToHtml(msg) {
+        let openTags = [];
+        let res = msg.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(ansiRegex, (match, codes) => {
+            const parts = codes.split(";"); const first = parseInt(parts[0]);
+            if (first === 0) { if (openTags.length > 0) return openTags.pop(); return ""; }
+            if (first === 38 && parts[1] === "2") {
+                const [r,g,b] = parts.slice(2).map(Number);
+                openTags.push("</span>");
+                if ((r===121&&g===3&&b===255)||(r===3&&g===255&&b===220)) return `<span style="color:var(--accent)">`;
+                return `<span style="color:rgb(${r},${g},${b})">`;
+            }
+            if (basicMap[first]) { openTags.push("</span>"); return `<span style="color:${basicMap[first]}">`; }
+            return "";
+        });
+        return res + openTags.reverse().join("");
+    }
+
+    function startLogs() {
+        if (_lt) return;
+        const t = document.getElementById('tm');
+        _lt = setInterval(async () => {
+            if (!window.pywebview?.api) return;
+            const o = await pywebview.api.get_logs();
+            if (o) {
+                const isScrolled = t.scrollHeight - t.clientHeight <= t.scrollTop + 80;
+                if (!_logLineNode) { _logLineNode = document.createElement('span'); t.appendChild(_logLineNode); }
+                let lines = o.split('\n');
+                for (let j = 0; j < lines.length - 1; j++) {
+                    let lineStr = lines[j].replace(/\r$/,'');
+                    parseProgress(lineStr);
+                    let span = document.createElement('span');
+                    span.innerHTML = ansiToHtml(lineStr) + '\n';
+                    t.appendChild(span);
+                }
+                while (t.childNodes.length > 600) t.firstChild.remove();
+                if (isScrolled) t.scrollTop = t.scrollHeight;
+            }
+            updateDashboardMetrics();
+        }, 50);
+    }
+
+    async function run(target, data = null) {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('on'));
+        document.querySelectorAll('.view').forEach(v => { v.classList.remove('on'); v.style.display='none'; });
+        document.querySelector('[data-v="term"]').classList.add('on');
+        document.getElementById('v-term').style.display = 'block';
+        document.getElementById('stat-gen').textContent = '0';
+        document.getElementById('stat-ev').textContent = '0';
+        document.getElementById('stat-cap').textContent = '0';
+        document.getElementById('stat-total').textContent = '0';
+        document.getElementById('pb-fill').style.width = '0%';
+        document.getElementById('pb-details').textContent = 'Starting...';
+        document.getElementById('gen-progress-container').style.display = 'none';
+        sysLog('Starting ' + target + '...');
+        await pywebview.api.start_process(target, data);
+    }
+    async function startJoiner() {
+        const m = document.getElementById('j-mode').value;
+        const link = document.getElementById('j-link').value;
+        run(m === 'auth' ? 'auth_joiner' : 'link_joiner', m === 'link' ? link : null);
+    }
+    async function stop() {
+        sysLog('Stopping process...');
+        await pywebview.api.stop_process();
+    }
+    function sysLog(msg) {
+        const t = document.getElementById('tm');
+        const s = document.createElement('span');
+        s.className = 't-s';
+        s.textContent = '[APZX] ' + msg + '\n';
+        t.appendChild(s); t.scrollTop = t.scrollHeight;
+    }
+
+    let _cfg = {};
+    function updateMail() {
+        const p = document.getElementById('cfg-mp').value;
+        const ms = _cfg.mail_services || {};
+        const svc = ms[p] || {};
+        ['mf-key','mf-mc','mf-host','mf-dom'].forEach(id => document.getElementById(id).style.display='none');
+        document.getElementById('cfg-mapi').value = '';
+        document.getElementById('cfg-mmc').value = '';
+        document.getElementById('cfg-mhost').value = '';
+        document.getElementById('cfg-mdom').value = '';
+        const none = document.getElementById('mf-none');
+        if (p === 'tempmail_lol') { none.style.display='block'; return; }
+        none.style.display='none';
+        document.getElementById('mf-key').style.display='block';
+        if (p === 'duckmail') { document.getElementById('mf-key-lbl').textContent='Password'; document.getElementById('cfg-mapi').value=svc.password||''; }
+        else if (p === 'hotmail007') { document.getElementById('mf-key-lbl').textContent='Client Key'; document.getElementById('cfg-mapi').value=svc.client_key||''; }
+        else { document.getElementById('mf-key-lbl').textContent='API Key'; document.getElementById('cfg-mapi').value=svc.api_key||''; }
+        if (p === 'lution' || p === 'zeus') { document.getElementById('mf-mc').style.display='block'; document.getElementById('cfg-mmc').value=svc.mailcode||''; }
+        if (p === 'mailcow') {
+            document.getElementById('mf-host').style.display='block'; document.getElementById('cfg-mhost').value=svc.host||'';
+            document.getElementById('mf-dom').style.display='block'; document.getElementById('cfg-mdom').value=svc.domain||'';
+        }
+        const names = {duckmail:'DuckMail',cybertemp:'CyberTemp',tempmail_lol:'TempMail.lol',hotmail007:'Hotmail007',lution:'Lution',zeus:'Zeus',draxono:'Draxono',mailcow:'Mailcow'};
+        document.getElementById('mail-badge').textContent = names[p] || p;
+    }
+    async function loadCfg() {
+        if (!window.pywebview?.api) return;
+        const c = await pywebview.api.load_config();
+        _cfg = c;
+        document.getElementById('cfg-verify').checked = c.verification?.enabled ?? true;
+        document.getElementById('cfg-warp').checked = c.cloudflare_warp?.enabled ?? false;
+        document.getElementById('cfg-localip').checked = c.use_local_ip ?? false;
+        const cap = c['9captcha'] || {};
+        const th = c.threading || {};
+        document.getElementById('th-gen').value = th.generator ?? c.threads ?? 1;
+        document.getElementById('th-joiner').value = th.joiner ?? 100;
+        document.getElementById('th-proxy').value = th.proxy_checker ?? 50;
+        document.getElementById('th-checker').value = th.checker ?? 10;
+        document.getElementById('th-hz').value = th.humanizer ?? c.humanizer?.max_threads ?? 3;
+        document.getElementById('cfg-api').value = cap.api_key || '';
+        document.getElementById('cfg-ext').checked = cap.extension_solver ?? true;
+        document.getElementById('cfg-req').checked = cap.req_solver ?? false;
+        document.getElementById('solver-bd').textContent = cap.req_solver ? 'Request' : 'Extension';
+        const hz = c.humanizer || {};
+        document.getElementById('cfg-hz').checked = hz.enabled ?? false;
+        toggleHz(hz.enabled ?? false);
+        document.getElementById('hz-avatar').checked = hz.avatar ?? true;
+        document.getElementById('hz-pn').checked = hz.pronouns ?? true;
+        document.getElementById('hz-bio').checked = hz.bio ?? true;
+        document.getElementById('hz-dn').checked = hz.display_name ?? true;
+        document.getElementById('hz-bn').checked = hz.banner ?? false;
+        document.getElementById('hz-hs').checked = hz.hypesquad ?? true;
+        document.getElementById('hz-ret').value = hz.retries ?? 3;
+        const ms = c.mail_services || {};
+        for (const k in ms) { if (ms[k].enabled) { document.getElementById('cfg-mp').value = k; break; } }
+        updateMail();
+        const aj = c.auth_joiner || {};
+        document.getElementById('aj-tok').value = aj.bot?.token || '';
+        document.getElementById('aj-id').value = aj.bot?.id || '';
+        document.getElementById('aj-sec').value = aj.bot?.secret || '';
+        document.getElementById('aj-gid').value = aj.data?.guildId || '';
+        if (c.theme_accent) setAccent(c.theme_accent);
+        toast('Config loaded');
+    }
+    async function saveCfg(autosaved = false) {
+        if (!window.pywebview?.api) return;
+        const c = _cfg;
+        if (!c.threading) c.threading = {};
+        c.threading.generator = parseInt(document.getElementById('th-gen').value) || 1;
+        c.threading.joiner = parseInt(document.getElementById('th-joiner').value) || 100;
+        c.threading.proxy_checker = parseInt(document.getElementById('th-proxy').value) || 50;
+        c.threading.checker = parseInt(document.getElementById('th-checker').value) || 10;
+        c.threading.humanizer = parseInt(document.getElementById('th-hz').value) || 3;
+        if (!c.verification) c.verification = {};
+        c.verification.enabled = document.getElementById('cfg-verify').checked;
+        if (!c.cloudflare_warp) c.cloudflare_warp = {};
+        c.cloudflare_warp.enabled = document.getElementById('cfg-warp').checked;
+        c.use_local_ip = document.getElementById('cfg-localip').checked;
+        if (!c['9captcha']) c['9captcha'] = {};
+        c['9captcha'].api_key = document.getElementById('cfg-api').value;
+        c['9captcha'].extension_solver = document.getElementById('cfg-ext').checked;
+        c['9captcha'].req_solver = document.getElementById('cfg-req').checked;
+        if (!c.humanizer) c.humanizer = {};
+        c.humanizer.enabled = document.getElementById('cfg-hz').checked;
+        c.humanizer.avatar = document.getElementById('hz-avatar').checked;
+        c.humanizer.pronouns = document.getElementById('hz-pn').checked;
+        c.humanizer.bio = document.getElementById('hz-bio').checked;
+        c.humanizer.display_name = document.getElementById('hz-dn').checked;
+        c.humanizer.banner = document.getElementById('hz-bn').checked;
+        c.humanizer.hypesquad = document.getElementById('hz-hs').checked;
+        c.humanizer.retries = parseInt(document.getElementById('hz-ret').value) || 3;
+        const pSel = document.getElementById('cfg-mp').value;
+        const apiVal = document.getElementById('cfg-mapi').value;
+        if (!c.mail_services) c.mail_services = {};
+        for (const p of ['duckmail','cybertemp','tempmail_lol','hotmail007','lution','zeus','draxono','mailcow']) {
+            if (!c.mail_services[p]) c.mail_services[p] = {};
+            c.mail_services[p].enabled = (p === pSel);
+            if (p === pSel) {
+                if (p === 'duckmail') c.mail_services[p].password = apiVal;
+                else if (p === 'hotmail007') c.mail_services[p].client_key = apiVal;
+                else c.mail_services[p].api_key = apiVal;
+                if (p === 'lution' || p === 'zeus') c.mail_services[p].mailcode = document.getElementById('cfg-mmc').value;
+                if (p === 'mailcow') { c.mail_services[p].host = document.getElementById('cfg-mhost').value; c.mail_services[p].domain = document.getElementById('cfg-mdom').value; }
+            }
+        }
+        if (!c.auth_joiner) c.auth_joiner = { bot:{}, web:{}, data:{} };
+        if (!c.auth_joiner.bot) c.auth_joiner.bot = {};
+        if (!c.auth_joiner.data) c.auth_joiner.data = {};
+        c.auth_joiner.bot.token = document.getElementById('aj-tok').value;
+        c.auth_joiner.bot.id = document.getElementById('aj-id').value;
+        c.auth_joiner.bot.secret = document.getElementById('aj-sec').value;
+        c.auth_joiner.data.guildId = document.getElementById('aj-gid').value;
+        c.theme_accent = document.getElementById('color-pick').value;
+        _cfg = c;
+        await pywebview.api.save_config(c);
+        if (!autosaved) toast('Config saved');
+    }
+    function toast(msg) {
+        const b = document.getElementById('toasts'), e = document.createElement('div');
+        e.className = 'toast'; e.textContent = msg; b.appendChild(e);
+        requestAnimationFrame(() => e.classList.add('show'));
+        setTimeout(() => { e.classList.remove('show'); setTimeout(() => e.remove(), 300); }, 2500);
+    }
+    async function loadInputFilesList() {
+        if (!window.pywebview?.api) return;
+        const sel = document.getElementById('input-files-select');
+        sel.innerHTML = '<option value="">-- Select File --</option>';
+        const files = await pywebview.api.get_input_files();
+        if (files && files.length > 0) { files.forEach(f => { const opt = document.createElement('option'); opt.value = f; opt.textContent = f; sel.appendChild(opt); }); }
+    }
+    async function loadInputFile() {
+        const file = document.getElementById('input-files-select').value;
+        const editor = document.getElementById('input-editor');
+        if (!file) { editor.value = ''; return; }
+        editor.value = 'Loading...';
+        const content = await pywebview.api.read_input_file(file);
+        editor.value = content;
+    }
+    async function saveInputFile(autosaved = false) {
+        const file = document.getElementById('input-files-select').value;
+        if (!file) { toast('Please select a file first'); return; }
+        const content = document.getElementById('input-editor').value;
+        const ok = await pywebview.api.save_input_file(file, content);
+        if (ok && !autosaved) toast('Saved: ' + file);
+    }
+    let _cfgSaveTimeout = null, _fileSaveTimeout = null;
+    function toggleAutoSave(type) {
+        if (type === 'settings') {
+            const val = document.getElementById('cfg-autosave').checked;
+            localStorage.setItem('autosave_cfg', val);
+            if (val) saveCfg(true);
+        } else if (type === 'file') {
+            const val = document.getElementById('file-autosave').checked;
+            localStorage.setItem('autosave_file', val);
+            if (val && document.getElementById('input-files-select').value) saveInputFile(true);
+        }
+    }
+    function _initAutoSave() {
+        const asCfg = localStorage.getItem('autosave_cfg') === 'true';
+        const asFile = localStorage.getItem('autosave_file') === 'true';
+        document.getElementById('cfg-autosave').checked = asCfg;
+        document.getElementById('file-autosave').checked = asFile;
+        document.getElementById('v-settings').addEventListener('input', () => {
+            if (document.getElementById('cfg-autosave').checked) { clearTimeout(_cfgSaveTimeout); _cfgSaveTimeout = setTimeout(()=>saveCfg(true),1500); }
+        });
+        document.getElementById('v-settings').addEventListener('change', () => {
+            if (document.getElementById('cfg-autosave').checked) { clearTimeout(_cfgSaveTimeout); _cfgSaveTimeout = setTimeout(()=>saveCfg(true),1500); }
+        });
+        document.getElementById('input-editor').addEventListener('input', () => {
+            if (document.getElementById('file-autosave').checked) { clearTimeout(_fileSaveTimeout); _fileSaveTimeout = setTimeout(()=>{ if(document.getElementById('input-files-select').value) saveInputFile(true); },1500); }
+        });
+    }
+    setTimeout(() => {
+        document.getElementById('lf').style.width = '100%';
+        document.getElementById('lt').textContent = 'Ready';
+        setTimeout(() => {
+            document.getElementById('loader').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('app').style.display = 'flex';
+                startLogs();
+                if (window.pywebview?.api) { _initAutoSave(); loadCfg(); loadInputFilesList(); }
+            }, 400);
+        }, 500);
+    }, 1200);
+    window.addEventListener('pywebviewready', () => { _initAutoSave(); loadCfg(); loadInputFilesList(); });
+    </script>
+</body>
+</html>

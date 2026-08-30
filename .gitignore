@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Secrets & API keys
+*.key
+*.pem
+*.p12
+secrets/
+
+# Logs
+debug_register.txt
+*.log
+logs/
+
+# Generated output
+output/
+input/proxies.txt
+
+# Node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# Temp files
+*.tmp
+*.temp
+~$*
+*.bak

@@ -1,0 +1,23 @@
+.card {
+  background-color: #12121a;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(217,3,255,0.08);
+  margin-bottom: 20px;
+  border: 1px solid #1e1e2a;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(217,3,255,0.15);
+  border-color: rgba(217,3,255,0.3);
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #d903ff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(217,3,255,0.3);
+}

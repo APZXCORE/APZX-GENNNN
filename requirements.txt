@@ -1,0 +1,20 @@
+# Python core
+stealth_requests
+colorama
+pystyle
+websocket-client
+requests
+Pillow
+python-socks
+websockets
+tls_client
+primp
+pyfiglet
+
+# GUI (optional — uncomment if using Start-GUI.bat)
+# flask
+# pywebview
+
+# Extension browser (for 9Captcha extension solver)
+# playwright
+# truedriver
