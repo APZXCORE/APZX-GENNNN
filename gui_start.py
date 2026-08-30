@@ -374,11 +374,11 @@ if __name__ == "__main__":
     flask_thread.start()
 
     # Wait for Flask to be ready (retry up to 5s)
-    import urllib.request, urllib.error
+    import urllib.request
     ready = False
     for _ in range(50):
         try:
-            urllib.request.urlopen('http://127.0.0.1:5001/health', timeout=0.1)
+            urllib.request.urlopen('http://127.0.0.1:5001/health', timeout=0.2)
             ready = True
             break
         except Exception:
