@@ -192,7 +192,11 @@ def settings_menu():
         print(f"  Verification:   {W}{verif_cfg.get('enabled', True)}{R}")
         print(f"  Humanizer:      {W}{hz.get('enabled', False)}{R}")
         local_ip_val = cfg.get("use_local_ip", False)
-        proxy_count = len(proxy_manager._pool) if proxy_manager else 0
+        try:
+            with open(os.path.join(BASE_DIR, "input", "proxies.txt"), "r") as pf:
+                proxy_count = sum(1 for line in pf if line.strip() and not line.strip().startswith("#"))
+        except Exception:
+            proxy_count = 0
         print(f"  Local IP Mode:  {G if local_ip_val else RD}{'ON (90s cooldown)' if local_ip_val else 'OFF (uses proxies)'}{R}  {D}(proxies:{proxy_count}){R}")
         print(f"  Solver Mode:    {G if ext_on else RD}Ext:{ext_on}{R} | {G if vps_on else RD}Req:{vps_on}{R}  ({solver_str})")
         print()
