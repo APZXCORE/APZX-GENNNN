@@ -54,6 +54,10 @@ def index():
 def app_icon():
     return send_from_directory(ASSETS_DIR, 'apzx_icon.webp', mimetype='image/webp')
 
+@app.route('/health')
+def health():
+    return 'OK', 200
+
 
 
 class WindowController:
@@ -369,8 +373,19 @@ if __name__ == "__main__":
     flask_thread = threading.Thread(target=_run_flask, daemon=True)
     flask_thread.start()
 
-    # Wait for Flask to start
-    time.sleep(0.5)
+    # Wait for Flask to be ready (retry up to 5s)
+    import urllib.request, urllib.error
+    ready = False
+    for _ in range(50):
+        try:
+            urllib.request.urlopen('http://127.0.0.1:5001/health', timeout=0.1)
+            ready = True
+            break
+        except Exception:
+            time.sleep(0.1)
+    if not ready:
+        print("[APZX] [!] Flask failed to start on port 5001")
+        sys.exit(1)
 
     url = "http://127.0.0.1:5001"
     import webbrowser
