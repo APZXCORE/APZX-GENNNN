@@ -22,6 +22,11 @@ if errorlevel 1 (
     !PY_CMD! -m pip install pywebview 2>nul
 )
 
+!PY_CMD! -c "import socket; s=socket.socket(); result=s.connect_ex(('127.0.0.1',5001)); s.close(); exit(0 if result!=0 else 1)" 2>nul
+if not errorlevel 1 (
+    for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":5001 LISTENING"') do taskkill /f /pid %%a 2>nul
+)
+
 set APZX_FORCE_GUI=1
 !PY_CMD! start.py %*
 

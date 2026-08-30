@@ -367,8 +367,22 @@ if __name__ == "__main__":
     import logging
     logging.getLogger('werkzeug').setLevel(logging.CRITICAL)
 
+    # Find a free port (start at 5001)
+    import socket
+    def _find_free_port(start=5001, count=10):
+        for port in range(start, start + count):
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                try:
+                    s.bind(('127.0.0.1', port))
+                    return port
+                except OSError:
+                    continue
+        return start
+
+    _PORT = _find_free_port(5001)
+
     def _run_flask():
-        app.run(host='127.0.0.1', port=5001, debug=False, use_reloader=False)
+        app.run(host='127.0.0.1', port=_PORT, debug=False, use_reloader=False)
 
     flask_thread = threading.Thread(target=_run_flask, daemon=True)
     flask_thread.start()
@@ -378,16 +392,17 @@ if __name__ == "__main__":
     ready = False
     for _ in range(50):
         try:
-            urllib.request.urlopen('http://127.0.0.1:5001/health', timeout=0.2)
+            urllib.request.urlopen(f'http://127.0.0.1:{_PORT}/health', timeout=0.2)
             ready = True
             break
         except Exception:
             time.sleep(0.1)
     if not ready:
-        print("[APZX] [!] Flask failed to start on port 5001")
+        print(f"[APZX] [!] Flask failed to start on port {_PORT}")
         sys.exit(1)
 
-    url = "http://127.0.0.1:5001"
+    url = f"http://127.0.0.1:{_PORT}"
+    print(f"[APZX] Flask ready on port {_PORT}")
     import webbrowser
 
     # Try pywebview first
