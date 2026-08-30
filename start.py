@@ -34,51 +34,31 @@ def banner():
         pass
     if os.environ.get("GUI_MODE") == "1":
         return
-    print(f"""{P}  ┌───────────────────────────────────────────────┐
-  │                                               │
-  │   ██╗      ██████╗ ██████╗ ██████╗  ██████╗    │
-  │   ██║     ██╔═══██╗██╔═══██╗██╔══██╗██╔═══██╗  │
-  │   ██║     ██║   ██║██║   ██║██████╔╝██║   ██║  │
-  │   ██║     ██║   ██║██║   ██║██╔══██╗██║   ██║  │
-  │   ███████╗╚██████╔╝╚██████╔╝██║  ██║╚██████╔╝  │
-  │   ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  │
-  │                                               │
-  │   ██╗ ██████╗ ███╗   ██╗███████╗██████╗        │
-  │   ██║██╔═══██╗████╗  ██║██╔════╝██╔══██╗      │
-  │   ██║██║   ██║██╔██╗ ██║█████╗  ██║  ██║      │
-  │   ██║██║   ██║██║╚██╗██║██╔══╝  ██║  ██║      │
-  │   ██║╚██████╔╝██║ ╚████║███████╗██████╔╝      │
-  │   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═════╝      │
-  │                                               │
-  │    ██████╗ ██████╗ ██╗      █████╗ ███████╗   │
-  │   ██╔════╝██╔═══██╗██║     ██╔══██╗██╔════╝   │
-  │   ██║     ██║   ██║██║     ███████║███████╗   │
-  │   ██║     ██║   ██║██║     ██╔══██║╚════██║   │
-  │   ╚██████╗╚██████╔╝███████╗██║  ██║███████║   │
-  │    ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝   │
-  │                                               │
-  │   {C}APZX G3NNNN v1.0{R}   ·   Fast · Stealth · Reliable  │
-  │   {D}Made by 4iuc | APZXCORE{R}                        │
-  │                                               │
-  └───────────────────────────────────────────────┘{R}
+    print(f"""{P}            :::     ::::::::: ::::::::: :::    :::          ::::::::   ::::::::  ::::    :::
+       :+: :+:   :+:    :+:     :+:  :+:    :+:         :+:    :+: :+:    :+: :+:+:   :+:
+     +:+   +:+  +:+    +:+    +:+    +:+  +:+          +:+               +:+ :+:+:+  +:+
+   +#++:++#++: +#++:++#+    +#+      +#++:+           :#:            +#++:  +#+ +:+ +#+
+  +#+     +#+ +#+         +#+      +#+  +#+          +#+   +#+#        +#+ +#+  +#+#+#
+ #+#     #+# #+#        #+#      #+#    #+#         #+#    #+# #+#    #+# #+#   #+#+#
+###     ### ###       ######### ###    ###          ########   ########  ###    ####
+{R}
+{C}APZX G3NNNN v1.0{R}   •   Fast • Stealth • Reliable
+{D}Made by 4iuc | APZXCORE{R}
 """)
 def main_menu():
     while True:
         clear()
         banner()
-        print(f"  {P}┌───────────────────────────────────────────────┐{R}")
-        print(f"  {P}│{R}                                               {P}│{R}")
-        print(f"  {P}│{R}   {C}[1]{R}  Start Generator                        {P}│{R}")
-        print(f"  {P}│{R}   {C}[2]{R}  Settings                               {P}│{R}")
-        print(f"  {P}│{R}   {C}[3]{R}  Proxy Checker                          {P}│{R}")
-        print(f"  {P}│{R}   {C}[4]{R}  Setup {D}(Install Dependencies){R}           {P}│{R}")
-        print(f"  {P}│{R}   {C}[5]{R}  Uninstall Setup {D}(Clean Env){R}            {P}│{R}")
-        print(f"  {P}│{R}   {C}[6]{R}  Token Joiner                          {P}│{R}")
-        print(f"  {P}│{R}   {C}[7]{R}  Token Checker                         {P}│{R}")
-        print(f"  {P}│{R}   {C}[8]{R}  Token Onliner                         {P}│{R}")
-        print(f"  {P}│{R}   {C}[9]{R}  Exit                                  {P}│{R}")
-        print(f"  {P}│{R}                                               {P}│{R}")
-        print(f"  {P}└───────────────────────────────────────────────┘{R}")
+        print(f"  {C}MAIN MENU{R}")
+        print(f"  {C}[1]{R}  Start Generator")
+        print(f"  {C}[2]{R}  Settings")
+        print(f"  {C}[3]{R}  Proxy Checker")
+        print(f"  {C}[4]{R}  Setup {D}(Install Dependencies){R}")
+        print(f"  {C}[5]{R}  Uninstall Setup {D}(Clean Env){R}")
+        print(f"  {C}[6]{R}  Token Joiner")
+        print(f"  {C}[7]{R}  Token Checker")
+        print(f"  {C}[8]{R}  Token Onliner")
+        print(f"  {C}[9]{R}  Exit")
         print()
         choice = input(f"  {P}›{R} Select option: ").strip()
         if choice == "1":   start_generator()
@@ -95,19 +75,13 @@ def start_proxy_checker():
     subprocess.run([sys.executable, "engine/proxy_checker.py"], cwd=BASE_DIR)
 def start_joiner():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}Token Joiner{R}                              {P}│{R}")
-    print(f"  {P}├──────────────────────────────────────────┤{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}│{R}   {C}[1]{R}  Auth Joiner {G}(Recommended){R}          {P}│{R}")
-    print(f"  {P}│{R}   {D}     OAuth2 guilds.join - No Captcha{R}   {P}│{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}│{R}   {C}[2]{R}  Link Joiner                        {P}│{R}")
-    print(f"  {P}│{R}   {D}     Invite link based joining{R}          {P}│{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}│{R}   {C}[0]{R}  Back                                {P}│{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    print(f"\n  {C}TOKEN JOINER{R}")
+    print(f"  {C}[1]{R}  Auth Joiner {G}(Recommended){R}")
+    print(f"     OAuth2 guilds.join - No Captcha")
+    print(f"  {C}[2]{R}  Link Joiner")
+    print(f"     Invite link based joining")
+    print(f"  {C}[0]{R}  Back")
+    print()
     choice = input(f"  {P}›{R} Select joiner: ").strip()
     if choice == "1":
         start_auth_joiner()
@@ -116,9 +90,7 @@ def start_joiner():
 
 def start_auth_joiner():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}Starting Auth Joiner (OAuth2)...{R}          {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    print(f"\n  {C}Starting Auth Joiner (OAuth2)...{R}\n")
     auth_dir = os.path.join(BASE_DIR, "engine", "auth_joiner")
     if not os.path.exists(os.path.join(auth_dir, "src", "index.js")):
         print(f"  {RD}[!] Auth Joiner not found at {auth_dir}{R}")
@@ -132,35 +104,48 @@ def start_auth_joiner():
 
 def start_link_joiner():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}Starting Link Joiner...{R}                   {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    print(f"\n  {C}Starting Link Joiner...{R}\n")
     subprocess.run([sys.executable, "engine/joiner.py"], cwd=BASE_DIR)
     print(f"\n  {Y}›› Link Joiner stopped. Press Enter to return...{R}")
     input()
 
 def start_onliner():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}Starting Token Onliner...{R}                 {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    print(f"\n  {C}Starting Token Onliner...{R}\n")
     subprocess.run([sys.executable, "engine/onliner.py"], cwd=BASE_DIR)
     print(f"\n  {Y}›› Onliner stopped. Press Enter to return...{R}")
     input()
 
 def start_checker():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}Starting Token Checker...{R}                 {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    print(f"\n  {C}Starting Token Checker...{R}\n")
     subprocess.run([sys.executable, "engine/checker.py"], cwd=BASE_DIR)
     print(f"\n  {Y}›› Checker stopped. Press Enter to return...{R}")
     input()
 def start_generator():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}Starting APZX...{R}                         {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    cfg = load_config()
+    cap_cfg = cfg.get("9captcha", {})
+    api_key = (cap_cfg.get("api_key") or "").strip()
+
+    print(f"""{P}            :::     ::::::::: ::::::::: :::    :::          ::::::::   ::::::::  ::::    :::
+       :+: :+:   :+:    :+:     :+:  :+:    :+:         :+:    :+: :+:    :+: :+:+:   :+:
+     +:+   +:+  +:+    +:+    +:+    +:+  +:+          +:+               +:+ :+:+:+  +:+
+   +#++:++#++: +#++:++#+    +#+      +#++:+           :#:            +#++:  +#+ +:+ +#+
+  +#+     +#+ +#+         +#+      +#+  +#+          +#+   +#+#        +#+ +#+  +#+#+#
+ #+#     #+# #+#        #+#      #+#    #+#         #+#    #+# #+#    #+# #+#   #+#+#
+###     ### ###       ######### ###    ###          ########   ########  ###    ####
+{R}
+{C}APZX G3NNNN v1.0{R}   •   Fast • Stealth • Reliable
+{D}Made by 4iuc | APZXCORE{R}
+""")
+
+    if not api_key:
+        print(f"\n  {Y}⚠{R}  No 9Captcha API key set!")
+        print(f"    Get your key at: {C}https://9captcha.pridesmp.fun{R}")
+        print(f"    Set it in {D}config.json{R} under {D}9captcha.api_key{R} or via Settings menu.")
+        print()
+
     print(f"  {D}›› Launching Token Generator...{R}")
     time.sleep(1)
     print(f"  {G}✓  Generator starting...{R}\n")
@@ -181,40 +166,35 @@ def settings_menu():
         if ext_on: solver_mode.append("Extension")
         if vps_on: solver_mode.append("Req")
         solver_str = " + ".join(solver_mode) if solver_mode else "None (auto)"
-        # Find active mail provider
         active_mail = "None"
         for name in ["duckmail", "cybertemp", "tempmail_lol", "hotmail007", "lution", "zeus", "draxono", "mailcow"]:
             svc = mail_cfg.get(name, {})
             if svc.get("enabled", False):
                 active_mail = name
                 break
-        print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-        print(f"  {P}│{R}  {C}APZX Settings{R}                            {P}│{R}")
-        print(f"  {P}├──────────────────────────────────────────┤{R}")
-        print(f"  {P}│{R}                                          {P}│{R}")
-        print(f"  {P}│{R}   {C}[1]{R}  Threads                              {P}│{R}")
-        print(f"  {P}│{R}   {C}[2]{R}  9Captcha API Key                    {P}│{R}")
-        print(f"  {P}│{R}   {C}[3]{R}  Mail Services                       {P}│{R}")
-        print(f"  {P}│{R}   {C}[4]{R}  Verification {D}(on/off){R}               {P}│{R}")
-        print(f"  {P}│{R}   {C}[5]{R}  Humanizer {D}(on/off){R}                  {P}│{R}")
-        print(f"  {P}│{R}   {C}[6]{R}  Solver URL {D}(Endpoint){R}              {P}│{R}")
-        print(f"  {P}│{R}   {C}[7]{R}  Open config.json in editor          {P}│{R}")
-        print(f"  {P}│{R}   {C}[8]{R}  Solver Mode {D}(Ext/Req){R}              {P}│{R}")
-        print(f"  {P}│{R}   {C}[9]{R}  Local IP Mode {D}(No Proxy){R}          {P}│{R}")
-        print(f"  {P}│{R}   {C}[0]{R}  Back                                {P}│{R}")
-        print(f"  {P}│{R}                                          {P}│{R}")
-        print(f"  {P}└──────────────────────────────────────────┘{R}\n")
-        print(f"  {P}│{R} {D}Current:{R}")
-        print(f"  {P}│{R}   Threads:        {W}{cfg.get('threads', 1)}{R}")
-        print(f"  {P}│{R}   Solver URL:     {W}{cap_cfg.get('url', 'https://9captcha-api.pridesmp.fun')[:20]}...{R}")
-        print(f"  {P}│{R}   9Captcha API:   {W}{cap_cfg.get('api_key', 'Not set')[:8]}...{R}")
-        print(f"  {P}│{R}   Mail Provider:  {G}{active_mail}{R}")
-        print(f"  {P}│{R}   Verification:   {W}{verif_cfg.get('enabled', True)}{R}")
-        print(f"  {P}│{R}   Humanizer:      {W}{hz.get('enabled', False)}{R}")
+        print(f"\n  {C}APZX SETTINGS{R}")
+        print(f"  {C}[1]{R}  Threads")
+        print(f"  {C}[2]{R}  9Captcha API Key")
+        print(f"  {C}[3]{R}  Mail Services")
+        print(f"  {C}[4]{R}  Verification {D}(on/off){R}")
+        print(f"  {C}[5]{R}  Humanizer {D}(on/off){R}")
+        print(f"  {C}[6]{R}  Solver URL {D}(Endpoint){R}")
+        print(f"  {C}[7]{R}  Open config.json in editor")
+        print(f"  {C}[8]{R}  Solver Mode {D}(Ext/Req){R}")
+        print(f"  {C}[9]{R}  Local IP Mode {D}(No Proxy){R}")
+        print(f"  {C}[0]{R}  Back")
+        print()
+        print(f"  {D}Current:{R}")
+        print(f"  Threads:        {W}{cfg.get('threads', 1)}{R}")
+        print(f"  Solver URL:     {W}{cap_cfg.get('url', 'https://9captcha-api.pridesmp.fun')[:20]}...{R}")
+        print(f"  9Captcha API:   {W}{cap_cfg.get('api_key', 'Not set')[:8]}...{R}")
+        print(f"  Mail Provider:  {G}{active_mail}{R}")
+        print(f"  Verification:   {W}{verif_cfg.get('enabled', True)}{R}")
+        print(f"  Humanizer:      {W}{hz.get('enabled', False)}{R}")
         local_ip_val = cfg.get("use_local_ip", False)
         proxy_count = len(proxy_manager._pool) if proxy_manager else 0
-        print(f"  {P}│{R}   Local IP Mode:  {G if local_ip_val else RD}{'ON (90s cooldown)' if local_ip_val else 'OFF (uses proxies)'}{R}  {D}(proxies:{proxy_count}){R}")
-        print(f"  {P}│{R}   Solver Mode:    {G if ext_on else RD}Ext:{ext_on}{R} | {G if vps_on else RD}Req:{vps_on}{R}  ({solver_str})")
+        print(f"  Local IP Mode:  {G if local_ip_val else RD}{'ON (90s cooldown)' if local_ip_val else 'OFF (uses proxies)'}{R}  {D}(proxies:{proxy_count}){R}")
+        print(f"  Solver Mode:    {G if ext_on else RD}Ext:{ext_on}{R} | {G if vps_on else RD}Req:{vps_on}{R}  ({solver_str})")
         print()
         s = input(f"  {P}›{R} Select setting: ").strip()
         if s == "1":
@@ -272,11 +252,10 @@ def settings_menu():
             else:
                 os.system(f"nano {CONFIG_FILE}")
         elif s == "8":
-            print(f"\n  {P}┌── Solver Mode ──────────────────────────┐{R}")
-            print(f"  {P}│{R}  {C}[1]{R}  Use Extension Solver                 {P}│{R}")
-            print(f"  {P}│{R}  {C}[2]{R}  Use Request Solver                   {P}│{R}")
-            print(f"  {P}│{R}  {C}[0]{R}  Back                                 {P}│{R}")
-            print(f"  {P}└──────────────────────────────────────────┘{R}")
+            print(f"\n  {C}SOLVER MODE{R}")
+            print(f"  {C}[1]{R}  Use Extension Solver")
+            print(f"  {C}[2]{R}  Use Request Solver")
+            print(f"  {C}[0]{R}  Back")
             sub = input(f"  {P}›{R} Select: ").strip()
             if "9captcha" not in cfg: cfg["9captcha"] = {}
             if sub == "1":
@@ -320,22 +299,17 @@ def mail_services_menu(cfg):
         if "mail_services" not in cfg:
             cfg["mail_services"] = {}
         ms = cfg["mail_services"]
-        print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-        print(f"  {P}│{R}  {C}Mail Services{R}                             {P}│{R}")
-        print(f"  {P}├──────────────────────────────────────────┤{R}")
-        print(f"  {P}│{R}                                          {P}│{R}")
+        print(f"\n  {C}MAIL SERVICES{R}")
         for i, name in enumerate(provider_order, 1):
             svc = ms.get(name, {})
             enabled = svc.get("enabled", False)
             status = f"{G}ON{R}" if enabled else f"{RD}OFF{R}"
             label = PROVIDER_NAMES.get(name, name)
-            print(f"  {P}│{R}   {C}[{i}]{R}  {label:<14} {status}                  {P}│{R}")
-        print(f"  {P}│{R}                                          {P}│{R}")
-        print(f"  {P}│{R}   {C}[8]{R}  Set API Key / Password              {P}│{R}")
-        print(f"  {P}│{R}   {C}[9]{R}  Set Mailcode / Domain               {P}│{R}")
-        print(f"  {P}│{R}   {C}[0]{R}  Back                                {P}│{R}")
-        print(f"  {P}│{R}                                          {P}│{R}")
-        print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+            print(f"  {C}[{i}]{R}  {label} {status}")
+        print(f"  {C}[8]{R}  Set API Key / Password")
+        print(f"  {C}[9]{R}  Set Mailcode / Domain")
+        print(f"  {C}[0]{R}  Back")
+        print()
         # Show current key info
         for name in provider_order:
             svc = ms.get(name, {})
@@ -441,9 +415,7 @@ def mail_services_menu(cfg):
                 pass
 def setup():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}APZX Setup{R}                                 {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    print(f"\n  {C}APZX SETUP{R}\n")
     print(f"  {D}›› Installing dependencies...{R}\n")
     req_path = os.path.join(BASE_DIR, "requirements.txt")
     os.system(f"pip install -r \"{req_path}\"")
@@ -459,9 +431,7 @@ def setup():
     
 def uninstall_setup():
     clear()
-    print(f"\n  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}  {C}APZX Uninstall Setup{R}                     {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}\n")
+    print(f"\n  {C}APZX UNINSTALL SETUP{R}\n")
     print(f"  {D}›› Removing Python dependencies...{R}\n")
     req_path = os.path.join(BASE_DIR, "requirements.txt")
     os.system(f"pip uninstall -y -r \"{req_path}\"")
@@ -493,19 +463,13 @@ def launch_gui():
 def ask_ui_mode():
     clear()
     banner()
-    print(f"  {P}┌──────────────────────────────────────────┐{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}│{R}   {C}Select your preferred interface:{R}        {P}│{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}│{R}   {C}[1]{R}  GUI Mode {G}(Modern UI){R}                {P}│{R}")
-    print(f"  {P}│{R}   {D}     Graphical interface with tabs{R}     {P}│{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}│{R}   {C}[2]{R}  CLI Mode {D}(Terminal){R}                 {P}│{R}")
-    print(f"  {P}│{R}   {D}     Classic command-line interface{R}    {P}│{R}")
-    print(f"  {P}│{R}                                          {P}│{R}")
-    print(f"  {P}└──────────────────────────────────────────┘{R}")
-    print(f"\n  {D}  You can change this later in config.json{R}")
-    print(f"  {D}  or in Settings > UI Mode{R}\n")
+    print(f"  {C}SELECT YOUR PREFERRED INTERFACE{R}")
+    print(f"  {C}[1]{R}  GUI Mode {G}(Modern UI){R}")
+    print(f"     Graphical interface with tabs")
+    print(f"  {C}[2]{R}  CLI Mode {D}(Terminal){R}")
+    print(f"     Classic command-line interface")
+    print(f"\n  {D}You can change this later in config.json{R}")
+    print(f"  {D}or in Settings > UI Mode{R}\n")
     while True:
         choice = input(f"  {P}›{R} Select (1/2): ").strip()
         if choice == "1":

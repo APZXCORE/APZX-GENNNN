@@ -9,7 +9,7 @@ from collections import deque
 
 # ──── Pre-check imports before anything else ────
 try:
-    from flask import Flask, render_template
+    from flask import Flask, render_template, send_from_directory
     HAS_FLASK = True
 except ImportError:
     HAS_FLASK = False
@@ -21,8 +21,6 @@ try:
     HAS_WEBVIEW = True
 except ImportError:
     HAS_WEBVIEW = False
-    print("[APZX] WARNING: pywebview not found. GUI will open in browser.")
-    print("[APZX] Install with: pip install pywebview")
 
 # ──── Environment ────
 if os.name == "nt":
@@ -36,6 +34,7 @@ if os.name == "nt":
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
 
 # Precompiled ANSI escape stripper for terminal output
 _ANSI_RE = re.compile(r'\x1b\[[0-9;]*[a-zA-Z]')
@@ -50,6 +49,8 @@ app = Flask(
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
 
 
 class WindowController:
@@ -355,25 +356,25 @@ class WindowController:
 if __name__ == "__main__":
     controller = WindowController()
 
-    # Start Flask in background
-    print("[APZX] Starting Flask server on http://127.0.0.1:5001 ...")
-    flask_thread = threading.Thread(
-        target=lambda: app.run(host='127.0.0.1', port=5001, debug=False, use_reloader=False),
-        daemon=True
-    )
+    # Start Flask in background (silent — suppress dev server warnings)
+    import logging
+    logging.getLogger('werkzeug').setLevel(logging.CRITICAL)
+
+    def _run_flask():
+        app.run(host='127.0.0.1', port=5001, debug=False, use_reloader=False)
+
+    flask_thread = threading.Thread(target=_run_flask, daemon=True)
     flask_thread.start()
 
     # Wait for Flask to start
-    time.sleep(1.0)
+    time.sleep(0.5)
 
-    # Try to open in browser as fallback
-    import webbrowser
     url = "http://127.0.0.1:5001"
+    import webbrowser
 
     # Try pywebview first
     if HAS_WEBVIEW:
         try:
-            print("[APZX] Launching native GUI window...")
             webview.create_window(
                 title="APZX G3NNNN v1.0",
                 url=url,
@@ -386,20 +387,14 @@ if __name__ == "__main__":
             # Prefer edgechromium on Windows, default on other OS
             gui = "edgechromium" if sys.platform == "win32" else None
             webview.start(debug=False, gui=gui)
-            print("[APZX] GUI window closed.")
         except Exception as e:
-            print(f"[APZX] pywebview failed: {e}")
-            print("[APZX] Falling back to system browser...")
             webbrowser.open(url)
     else:
-        print("[APZX] Opening in system browser...")
         webbrowser.open(url)
-
-    print("[APZX] Server will keep running. Close this window to stop.")
     # Keep script alive so Flask doesn't die
     try:
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
-        print("\n[APZX] Stopping...")
+        controller.close()
         sys.exit(0)

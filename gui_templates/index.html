@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APZX G3NNNN</title>
-    <link rel="icon" href="{{ url_for('static', filename='9captcha-logo.webp') }}">
+    <title>APZX G3NNNN v1.0</title>
+    <link rel="icon" href="{{ url_for('app_icon') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/variables.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loading-screen.css') }}">
@@ -39,6 +39,13 @@
             flex-direction:column; padding:16px 0;
         }
         .sidebar-brand { padding:0 16px 20px; border-bottom:1px solid var(--border); margin-bottom:12px; }
+        .brand-row { display:flex; align-items:center; gap:10px; }
+        .brand-row img {
+            width:28px; height:28px; border-radius:8px;
+            box-shadow:0 0 16px rgba(217,3,255,0.35);
+            background:rgba(255,255,255,0.03);
+            object-fit:cover;
+        }
         .sidebar-brand h1 {
             font-size:18px; font-weight:800; letter-spacing:2px;
             background:linear-gradient(135deg,var(--accent),var(--secondary));
