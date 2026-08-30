@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <img src="https://media.discordapp.net/attachments/1512407243029741569/1543650707675291799/ascii-art-text.png?ex=6a95a440&is=6a9452c0&hm=d73fe8f6388d4274917330db988399243eaf286f6d0cf8eca8378bba8e289ef8&=&format=webp&quality=lossless" alt="APZX G3NNNN Banner" width="600" style="border-radius:12px;margin-bottom:20px">
+  <img src="https://media.discordapp.net/attachments/1512407243029741569/1543651157816250390/ascii-art-text_1.png?ex=6a95a4ab&is=6a94532b&hm=8977d79439a7f11c9d593426ba722515929059d1482f4fd76d7d91ab2889e53d&=&format=webp&quality=lossless" alt="APZX G3NNNN Banner" width="600" style="border-radius:12px;margin-bottom:20px">
 
   <h3><img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/0a_Sparkles3.webp" width="20" height="20" style="vertical-align:middle"> Discord Token &amp; Email-Verified Account Generator <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/0a_Sparkles3.webp" width="20" height="20" style="vertical-align:middle"></h3>
 
