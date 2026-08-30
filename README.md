@@ -1,35 +1,87 @@
-# APZX G3NNNN v1.0
+# 🛡️ APZX G3NNNN v1.0
 
-**Discord token & email-verified account generator**
+<div align="center">
 
-![APZX G3NNNN](assets/legionproxy-logo.png)
+  <img src="https://i.imgur.com/Jh3s5bT.png" alt="APZX G3NNNN Banner" width="600" style="border-radius:12px;margin-bottom:20px">
 
-*Made by 4iuc | APZXCORE*
+  <h3>⚡ Discord Token & Email-Verified Account Generator ⚡</h3>
+
+  <p>Fast · Stealth · Reliable · Open Source</p>
+
+  <p><strong>Made by 4iuc | APZXCORE</strong></p>
+
+  <br>
+
+  <!-- Main Banner Image -->
+  <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/legionproxy-logo.png" alt="LegionProxy" width="250" style="margin-bottom:20px;border-radius:8px">
+
+  <br><br>
+
+  <!-- Status Badges -->
+  <a href="https://github.com/APZXCORE/APZX-GENNNN">
+    <img src="https://img.shields.io/github/release/APZXCORE/APZX-GENNNN.svg?style=for-the-badge&color=00f8dc&logo=github" alt="Release">
+  </a>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN">
+    <img src="https://img.shields.io/github/stars/APZXCORE/APZX-GENNNN?style=for-the-badge&color=blue&logo=github" alt="Stars">
+  </a>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN">
+    <img src="https://img.shields.io/github/forks/APZXCORE/APZX-GENNNN?style=for-the-badge&color=green&logo=github" alt="Forks">
+  </a>
+  <br>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN">
+    <img src="https://img.shields.io/github/license/APZXCORE/APZX-GENNNN?style=for-the-badge&color=yellow" alt="License">
+  </a>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN">
+    <img src="https://img.shields.io/github/issues/APZXCORE/APZX-GENNNN?style=for-the-badge&color=red" alt="Issues">
+  </a>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN">
+    <img src="https://img.shields.io/badge/Python-3.10%2B-00f8dc?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  </a>
+  <br>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN/pulls">
+    <img src="https://img.shields.io/github/issues-pr/APZXCORE/APZX-GENNNN?style=for-the-badge&color=blue" alt="PRs">
+  </a>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN/commits/main">
+    <img src="https://img.shields.io/github/last-commit/APZXCORE/APZX-GENNNN?style=for-the-badge&color=orange" alt="Last Commit">
+  </a>
+  <a href="https://github.com/APZXCORE/APZX-GENNNN/releases">
+    <img src="https://img.shields.io/github/downloads/APZXCORE/APZX-GENNNN/total?style=for-the-badge&color=success" alt="Downloads">
+  </a>
+
+</div>
 
 ---
 
 ## ⚡ Features
 
-- **Token Generation** — Request-based Discord account creation with full fingerprint spoofing
-- **Email Verification** — 7 mail providers: DuckMail, CyberTemp, TempMail.lol, Hotmail007, Zeus, Draxono, Mailcow
-- **Humanizer Engine** — Auto-sets display name, bio, pronouns, avatar, and HypeSquad
-- **Utility Tools** — Server Joiner, Auth Joiner, Token Checker, Token Onliner, and Proxy Checker
-- **Proxy Rotation** — Auto-cycles proxies with IP burn detection
-- **9Captcha Solver** — Extension or Request mode support
-- **WebSocket Keepalive** — Maintains gateway presence to prevent instant disable
-- **Local IP Mode** — Use your own IP with 90s cooldown between accounts
+| Feature | Description |
+|---------|-------------|
+| 🎫 **Token Generation** | Request-based Discord account creation with full fingerprint spoofing |
+| 📧 **Email Verification** | 7 mail providers: DuckMail, CyberTemp, TempMail.lol, Hotmail007, Zeus, Draxono, Mailcow |
+| 🎨 **Humanizer Engine** | Auto-sets display name, bio, pronouns, avatar, and HypeSquad |
+| 🔗 **Utility Tools** | Server Joiner, Auth Joiner, Token Checker, Token Onliner, Proxy Checker |
+| 🌐 **Proxy Rotation** | Auto-cycles proxies with IP burn detection |
+| 🤖 **9Captcha Solver** | Extension or Request mode support |
+| 🔌 **WebSocket Keepalive** | Maintains gateway presence to prevent instant disable |
+| 🖥️ **Local IP Mode** | Use your own IP with 90s cooldown between accounts |
+| 🖼️ **GUI & CLI** | Beautiful cyberpunk GUI + full terminal support |
+| ⚙️ **Auto-Config** | One-click settings management via GUI |
 
 ---
 
 ## 🚀 Quick Start
 
+### Option 1 — GUI (Recommended)
 ```
-Start-GUI.bat   # Opens the dark cyberpunk GUI (recommended)
+Start-GUI.bat   # Opens the dark cyberpunk GUI
+```
+
+### Option 2 — CLI
+```
 Start-CLI.bat   # Terminal version
 ```
 
-Or manually:
-
+### Option 3 — Manual
 ```bash
 pip install -r requirements.txt
 python start.py
@@ -37,19 +89,58 @@ python start.py
 
 ---
 
-## ⚙️ Config
+## 📂 Project Structure
 
-Edit `config.json` or use the Settings menu:
+```
+gen/
+├── main.py              # Core generator engine
+├── start.py             # CLI menu & settings
+├── gui_start.py         # Flask + pywebview GUI server
+├── config.json          # All settings (edit directly or via GUI)
+├── requirements.txt     # Python dependencies
+├── Start-CLI.bat        # Run CLI version
+├── Start-GUI.bat        # Run GUI version
+├── start.bat            # Auto-launch
+├── README.md            # This file
+├── .gitignore           # Git ignore rules
+├── assets/              # Logos & images
+│   └── legionproxy-logo.png
+├── engine/              # Core modules
+│   ├── bypasses.py      # Anti-detection & fingerprint spoofing
+│   ├── checker.py       # Token validity checker
+│   ├── joiner.py        # Discord server joiner
+│   ├── onliner.py       # Token onliner (WebSocket)
+│   ├── proxy_checker.py # Proxy health verification
+│   ├── extension_browser.py  # 9Captcha extension handler
+│   ├── auth_joiner/     # Discord bot auth joiner
+│   ├── avatar/          # 400+ avatar images
+│   └── data/            # Names, bios, pronouns
+├── extension/           # 9Captcha browser extension
+│   ├── manifest.json    # Extension manifest
+│   ├── popup.html/js    # Extension UI
+│   └── captcha/         # HCaptcha solving logic
+├── gui_templates/       # Web UI templates
+├── gui_static/          # CSS & static assets
+├── input/               # Proxies go here (proxies.txt)
+└── output/              # Generated tokens & emails
+```
+
+---
+
+## ⚙️ Configuration
+
+Edit `config.json` or use the **Settings** menu in the GUI:
 
 | Setting | Description |
 |---------|-------------|
-| **9Captcha API Key** | Get yours at [9captcha.pridesmp.fun](https://9captcha.pridesmp.fun) |
-| **Mail Services** | Toggle providers on/off, set API keys/passwords |
-| **Solver Mode** | Extension (proxyless OK) or Request (requires residential proxies) |
-| **Threads** | Concurrent generation count |
-| **Humanizer** | Enable/disable profile customization |
-| **Local IP Mode** | Use your own IP instead of proxies (90s cooldown between accounts) |
-| **Cloudflare WARP** | Rotate IP via WARP (Windows only) |
+| 🔑 **9Captcha API Key** | Get yours at [9captcha.pridesmp.fun](https://9captcha.pridesmp.fun) |
+| 📧 **Mail Services** | Toggle providers on/off, set API keys & passwords |
+| 🤖 **Solver Mode** | Extension (proxyless OK) or Request (requires residential proxies) |
+| 🧵 **Threads** | Concurrent generation count |
+| 🎨 **Humanizer** | Enable/disable profile customization |
+| 🖥️ **Local IP Mode** | Use your own IP instead of proxies (90s cooldown) |
+| 🌬️ **Cloudflare WARP** | Rotate IP via WARP (Windows only) |
+| 🎨 **Theme Accent** | GUI color customization |
 
 ---
 
@@ -63,15 +154,23 @@ Add proxies to `input/proxies.txt` in any of these formats (auto-detected):
 | `user:pass@ip:port` | `uorder123:pass123@123.45.67.89:8080` |
 | `ip:port` (no auth) | `123.45.67.89:8080` |
 
-> **Note:** Request solver requires quality **residential** proxies. Datacenter IPs are blocked by Discord. Extension solver works proxyless. Local IP mode auto-enables when no proxies are found.
+> **⚠️ Note:** Request solver requires quality **residential** proxies. Datacenter IPs are blocked by Discord. Extension solver works proxyless. Local IP mode auto-enables when no proxies are found.
 
 ---
 
-## 🛡️ Proxies Powered & Sponsored By LegionProxy
+## 🛡️ Powered & Sponsored By LegionProxy
 
-![LegionProxy](assets/legionproxy-logo.png)
+<div align="center">
 
-This project is proudly sponsored by **[LegionProxy](https://legionproxy.io)** — high-quality residential proxies optimized for Discord automation.
+  <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/legionproxy-logo.png" alt="LegionProxy" width="200" style="margin:20px 0">
+
+  <p><strong><a href="https://legionproxy.io" target="_blank">LegionProxy.io</a></strong> — Premium Residential Proxies</p>
+
+  <a href="https://discord.gg/wQbqecjc8b" target="_blank">
+    <img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord">
+  </a>
+
+</div>
 
 ### Why LegionProxy?
 
@@ -99,6 +198,7 @@ This project is proudly sponsored by **[LegionProxy](https://legionproxy.io)** �
 | **Smartproxy** | `ip:port:user:pass` or `user:pass@ip:port` |
 | **Bright Data** | `ip:port:user:pass` |
 | **Soax** | `ip:port:user:pass` |
+| **IPRoyal** | `ip:port:user:pass` |
 
 ---
 
@@ -128,33 +228,21 @@ Check `debug_register.txt` for full request/response details.
 Get your API key at [9captcha.pridesmp.fun](https://9captcha.pridesmp.fun)
 
 Two modes available:
-- **Extension Mode** — Works without proxies
+- **Extension Mode** — Works without proxies (recommended for beginners)
 - **Request Mode** — Requires residential proxies
 
 ---
 
-## 📂 Project Structure
+## 📊 Stats
 
-```
-gen/
-├── main.py              # Core generator engine
-├── start.py             # CLI menu & settings
-├── gui_start.py         # Flask + pywebview GUI server
-├── config.json          # All settings (edit directly or via GUI)
-├── requirements.txt     # Python dependencies
-├── Start-CLI.bat        # Run CLI version
-├── Start-GUI.bat        # Run GUI version
-├── README.md            # This file
-├── .gitignore           # Git ignore rules
-├── assets/              # Logos & images
-│   └── legionproxy-logo.png
-├── engine/              # Bypasses, joiner, proxy checker, extensions
-├── gui_templates/       # Web UI templates
-├── gui_static/          # CSS & static assets
-├── input/               # Proxies go here (proxies.txt)
-├── output/              # Generated tokens & emails
-└── extension/           # 9Captcha browser extension
-```
+<div align="center">
+
+![GitHub repo size](https://img.shields.io/github/repo-size/APZXCORE/APZX-GENNNN?style=for-the-badge&color=00f8dc)
+![GitHub top language](https://img.shields.io/github/languages/top/APZXCORE/APZX-GENNNN?style=for-the-badge&color=blue)
+![GitHub issues](https://img.shields.io/github/issues/APZXCORE/APZX-GENNNN?style=for-the-badge&color=red)
+![GitHub stars](https://img.shields.io/github/stars/APZXCORE/APZX-GENNNN?style=for-the-badge&color=yellow)
+
+</div>
 
 ---
 
@@ -166,4 +254,12 @@ By downloading, accessing, or running this repository, you explicitly accept and
 
 ---
 
-**v1.0 — Made by 4iuc | APZXCORE** · Proxies powered by [LegionProxy](https://legionproxy.io) · Join their [Discord](https://discord.gg/wQbqecjc8b)
+<div align="center">
+
+**v1.0 — Made by 4iuc | APZXCORE**
+
+Proxies powered by [LegionProxy](https://legionproxy.io) · Join their [Discord](https://discord.gg/wQbqecjc8b)
+
+⭐ Star this repo if you found it useful!
+
+</div>
