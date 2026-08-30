@@ -39,7 +39,8 @@ debug_register.txt
 logs/
 
 # Generated output
-output/
+output/*
+!output/.gitkeep
 input/proxies.txt
 
 # Node modules
