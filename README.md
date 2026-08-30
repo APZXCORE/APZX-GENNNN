@@ -1,12 +1,12 @@
-# 🛡️ APZX G3NNNN v1.0
+# <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/apzx_icon.webp" width="28" height="28" alt="APZX" style="vertical-align:middle;margin-right:8px"> APZX G3NNNN v1.0
 
 <div align="center">
 
   <img src="https://i.imgur.com/Jh3s5bT.png" alt="APZX G3NNNN Banner" width="600" style="border-radius:12px;margin-bottom:20px">
 
-  <h3>⚡ Discord Token & Email-Verified Account Generator ⚡</h3>
+  <h3><img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/0a_Sparkles3.webp" width="20" height="20" style="vertical-align:middle"> Discord Token &amp; Email-Verified Account Generator <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/0a_Sparkles3.webp" width="20" height="20" style="vertical-align:middle"></h3>
 
-  <p>Fast · Stealth · Reliable · Open Source</p>
+  <p>Fast &middot; Stealth &middot; Reliable &middot; Open Source</p>
 
   <p><strong>Made by 4iuc | APZXCORE</strong></p>
 
@@ -52,24 +52,24 @@
 
 ---
 
-## ⚡ Features
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/booster.webp" width="22" height="22" style="vertical-align:middle;margin-right:6px"> Features
 
 | Feature | Description |
 |---------|-------------|
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Token Generation** | Request-based Discord account creation with full fingerprint spoofing |
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Email Verification** | 7 mail providers: DuckMail, CyberTemp, TempMail.lol, Hotmail007, Zeus, Draxono, Mailcow |
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Humanizer Engine** | Auto-sets display name, bio, pronouns, avatar, and HypeSquad |
-| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Utility Tools** | Server Joiner, Auth Joiner, Token Checker, Token Onliner, Proxy Checker |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/links.webp" width="18" height="18"> **Utility Tools** | Server Joiner, Auth Joiner, Token Checker, Token Onliner, Proxy Checker |
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Proxy Rotation** | Auto-cycles proxies with IP burn detection |
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **9Captcha Solver** | Extension or Request mode support |
-| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **WebSocket Keepalive** | Maintains gateway presence to prevent instant disable |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/Online.webp" width="18" height="18"> **WebSocket Keepalive** | Maintains gateway presence to prevent instant disable |
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Local IP Mode** | Use your own IP with 90s cooldown between accounts |
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **GUI & CLI** | Beautiful cyberpunk GUI + full terminal support |
 | <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Auto-Config** | One-click settings management via GUI |
 
 ---
 
-## 🚀 Quick Start
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/forward.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Quick Start
 
 ### Option 1 — GUI (Recommended)
 ```
@@ -89,7 +89,7 @@ python start.py
 
 ---
 
-## 📂 Project Structure
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/disk.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Project Structure
 
 ```
 gen/
@@ -127,7 +127,7 @@ gen/
 
 ---
 
-## ⚙️ Configuration
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Configuration
 
 Edit `config.json` or use the **Settings** menu in the GUI:
 
@@ -144,7 +144,7 @@ Edit `config.json` or use the **Settings** menu in the GUI:
 
 ---
 
-## 🌐 Proxies
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/stock.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Proxies
 
 Add proxies to `input/proxies.txt` in any of these formats (auto-detected):
 
@@ -158,7 +158,7 @@ Add proxies to `input/proxies.txt` in any of these formats (auto-detected):
 
 ---
 
-## 🛡️ Powered & Sponsored By LegionProxy
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/shieldc.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Powered & Sponsored By LegionProxy
 
 <div align="center">
 
@@ -202,7 +202,7 @@ Add proxies to `input/proxies.txt` in any of these formats (auto-detected):
 
 ---
 
-## 🐛 Troubleshooting
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/trash.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Troubleshooting
 
 ### "Invalid Form Body" / "EMAIL_INVALID"
 Your temp mail domains are flagged by Discord. Switch to a different provider:
@@ -223,7 +223,7 @@ Check `debug_register.txt` for full request/response details.
 
 ---
 
-## 🔑 9Captcha API
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/lock.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> 9Captcha API
 
 Get your API key at [9captcha.pridesmp.fun](https://9captcha.pridesmp.fun)
 
@@ -233,7 +233,7 @@ Two modes available:
 
 ---
 
-## 📊 Stats
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/stats.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Stats
 
 <div align="center">
 
@@ -246,7 +246,7 @@ Two modes available:
 
 ---
 
-## ⚖️ Disclaimer
+## <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/blue_cross.webp" width="20" height="20" style="vertical-align:middle;margin-right:6px"> Disclaimer
 
 This tool is created for **educational, development, and security testing** purposes only. The developer (**APZX** / **4iuc | APZXCORE**) and any associated organizations or contributors are **not responsible** for any misuse, damage, bans, or unlawful actions conducted with this software. The end user accepts full and sole responsibility for all actions taken.
 
@@ -258,8 +258,8 @@ By downloading, accessing, or running this repository, you explicitly accept and
 
 **v1.0 — Made by 4iuc | APZXCORE**
 
-Proxies powered by [LegionProxy](https://legionproxy.io) · Join their [Discord](https://discord.gg/wQbqecjc8b)
+Proxies powered by [LegionProxy](https://legionproxy.io) &middot; Join their [Discord](https://discord.gg/wQbqecjc8b)
 
-⭐ Star this repo if you found it useful!
+<img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/gold.webp" width="22" height="22" alt="star"> Star this repo if you found it useful!
 
 </div>
