@@ -50,6 +50,9 @@ app = Flask(
 def index():
     return render_template('index.html')
 
+@app.route('/app-icon')
+def app_icon():
+    return send_from_directory(ASSETS_DIR, 'apzx_icon.webp', mimetype='image/webp')
 
 
 
