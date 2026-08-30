@@ -56,16 +56,16 @@
 
 | Feature | Description |
 |---------|-------------|
-| 🎫 **Token Generation** | Request-based Discord account creation with full fingerprint spoofing |
-| 📧 **Email Verification** | 7 mail providers: DuckMail, CyberTemp, TempMail.lol, Hotmail007, Zeus, Draxono, Mailcow |
-| 🎨 **Humanizer Engine** | Auto-sets display name, bio, pronouns, avatar, and HypeSquad |
-| 🔗 **Utility Tools** | Server Joiner, Auth Joiner, Token Checker, Token Onliner, Proxy Checker |
-| 🌐 **Proxy Rotation** | Auto-cycles proxies with IP burn detection |
-| 🤖 **9Captcha Solver** | Extension or Request mode support |
-| 🔌 **WebSocket Keepalive** | Maintains gateway presence to prevent instant disable |
-| 🖥️ **Local IP Mode** | Use your own IP with 90s cooldown between accounts |
-| 🖼️ **GUI & CLI** | Beautiful cyberpunk GUI + full terminal support |
-| ⚙️ **Auto-Config** | One-click settings management via GUI |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Token Generation** | Request-based Discord account creation with full fingerprint spoofing |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Email Verification** | 7 mail providers: DuckMail, CyberTemp, TempMail.lol, Hotmail007, Zeus, Draxono, Mailcow |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Humanizer Engine** | Auto-sets display name, bio, pronouns, avatar, and HypeSquad |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Utility Tools** | Server Joiner, Auth Joiner, Token Checker, Token Onliner, Proxy Checker |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Proxy Rotation** | Auto-cycles proxies with IP burn detection |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **9Captcha Solver** | Extension or Request mode support |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **WebSocket Keepalive** | Maintains gateway presence to prevent instant disable |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Local IP Mode** | Use your own IP with 90s cooldown between accounts |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **GUI & CLI** | Beautiful cyberpunk GUI + full terminal support |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Auto-Config** | One-click settings management via GUI |
 
 ---
 
@@ -133,14 +133,14 @@ Edit `config.json` or use the **Settings** menu in the GUI:
 
 | Setting | Description |
 |---------|-------------|
-| 🔑 **9Captcha API Key** | Get yours at [9captcha.pridesmp.fun](https://9captcha.pridesmp.fun) |
-| 📧 **Mail Services** | Toggle providers on/off, set API keys & passwords |
-| 🤖 **Solver Mode** | Extension (proxyless OK) or Request (requires residential proxies) |
-| 🧵 **Threads** | Concurrent generation count |
-| 🎨 **Humanizer** | Enable/disable profile customization |
-| 🖥️ **Local IP Mode** | Use your own IP instead of proxies (90s cooldown) |
-| 🌬️ **Cloudflare WARP** | Rotate IP via WARP (Windows only) |
-| 🎨 **Theme Accent** | GUI color customization |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **9Captcha API Key** | Get yours at [9captcha.pridesmp.fun](https://9captcha.pridesmp.fun) |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **Mail Services** | Toggle providers on/off, set API keys & passwords |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **Solver Mode** | Extension (proxyless OK) or Request (requires residential proxies) |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **Threads** | Concurrent generation count |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **Humanizer** | Enable/disable profile customization |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **Local IP Mode** | Use your own IP instead of proxies (90s cooldown) |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **Cloudflare WARP** | Rotate IP via WARP (Windows only) |
+| <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/settings.webp" width="18" height="18"> **Theme Accent** | GUI color customization |
 
 ---
 
@@ -154,7 +154,7 @@ Add proxies to `input/proxies.txt` in any of these formats (auto-detected):
 | `user:pass@ip:port` | `uorder123:pass123@123.45.67.89:8080` |
 | `ip:port` (no auth) | `123.45.67.89:8080` |
 
-> **⚠️ Note:** Request solver requires quality **residential** proxies. Datacenter IPs are blocked by Discord. Extension solver works proxyless. Local IP mode auto-enables when no proxies are found.
+> <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/info.webp" width="16" height="16"> **Note:** Request solver requires quality **residential** proxies. Datacenter IPs are blocked by Discord. Extension solver works proxyless. Local IP mode auto-enables when no proxies are found.
 
 ---
 
@@ -174,11 +174,11 @@ Add proxies to `input/proxies.txt` in any of these formats (auto-detected):
 
 ### Why LegionProxy?
 
-- ✅ **Rotating Residential IPs** — Fresh IP per request, perfect for Discord
-- ✅ **`uorder` format** — Use your LegionProxy dashboard username as the `uorder` user
-- ✅ **Auto-compatible** — Works with the `ip:port:user:pass` format out of the box
-- ✅ **Fast & Reliable** — Low latency, high uptime
-- ✅ **Discord-Optimized** — Specifically configured to bypass Discord's proxy detection
+- <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Rotating Residential IPs** — Fresh IP per request, perfect for Discord
+- <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **`uorder` format** — Use your LegionProxy dashboard username as the `uorder` user
+- <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Auto-compatible** — Works with the `ip:port:user:pass` format out of the box
+- <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Fast & Reliable** — Low latency, high uptime
+- <img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/tickbox_blue.webp" width="18" height="18"> **Discord-Optimized** — Specifically configured to bypass Discord's proxy detection
 
 ### How to Get Started
 
@@ -210,7 +210,7 @@ Your temp mail domains are flagged by Discord. Switch to a different provider:
 - Or enable **DuckMail** — it uses `duckmail.sbs` which works well
 
 ### "Rate Limited" / 429
-Your proxies are banned. Use residential proxies, not datacenter. LegionProxy rotating proxies work best for this.
+<img src="https://raw.githubusercontent.com/APZXCORE/APZX-GENNNN/main/assets/warning.webp" width="16" height="16"> Your proxies are banned. Use residential proxies, not datacenter. LegionProxy rotating proxies work best for this.
 
 ### Proxy Connection Errors
 If you see "Unsupported proxy syntax" or curl errors:
